@@ -1,0 +1,88 @@
+!obj:pylearn2.train.Train {
+    dataset: &train !obj:fooddata.FoodData {
+        which_set: 'train',
+        start: 0,
+        stop: %(train_stop)i,
+    },
+    model: &model !obj:pylearn2.models.mlp.MLP {
+        batch_size: %(batch_size)i,
+        monitor_only_misclass: True,
+        input_space: !obj:pylearn2.space.Conv2DSpace {
+            shape: &window_shape [96, 96],
+            num_channels: 3,
+        },
+        layers: [ !obj:pylearn2.models.mlp.ConvRectifiedLinear {
+                     layer_name: 'h2',
+                     output_channels: %(output_channels_h2)i,
+                     irange: %(irange_h2)f,
+                     kernel_shape: [%(kernel_size_h2)f, %(kernel_size_h2)f],
+                     pool_shape: [2, 2],
+                     pool_stride: [2, 2],
+                     left_slope: %(rectifier_left_slope)f,
+                     max_kernel_norm: %(max_kernel_norm_h2)f,
+                 }, !obj:pylearn2.models.mlp.Softmax {
+                     max_col_norm: %(max_col_norm_y)f,
+                     layer_name: 'y',
+                     n_classes: 2,
+                     irange:  %(irange_y)f
+                 }
+                ],
+    },
+    algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+        batch_size: %(batch_size)i,
+        learning_rate: %(init_learning_rate)f,
+        learning_rule: !obj:pylearn2.training_algorithms.learning_rule.Momentum {
+            init_momentum: %(init_momentum)f,
+            nesterov_momentum: True
+        },
+        seed: %(sgd_seed)s,
+        train_iteration_mode: even_sequential,
+        monitoring_dataset:
+            {
+                'valid' : !obj:fooddata.FoodData {
+                              which_set: 'train',
+                              start: %(train_stop)i,
+                              stop:  %(valid_stop)i,
+                          }
+                # 'test'  : !obj:pylearn2.datasets.mnist.MNIST {
+                #               which_set: 'test',
+                #               stop: %(test_stop)i
+                #           }
+            },
+        update_callbacks: [
+            # !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
+            #     model: *model,
+            #     tick_rate: 1,
+            #     monitor_rate: 100
+            # },
+            # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
+            #     model: *model
+            # }
+        ],
+        pre_update_callbacks: [
+            !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
+                model: *model
+            }
+        ],
+        cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
+            !obj:pylearn2.costs.cost.MethodCost {
+                method: 'cost_from_X'
+            }, !obj:pylearn2.costs.mlp.WeightDecay {
+                coeffs: [ %(weight_decay_h2)f, %(weight_decay_y)f ]
+            }
+            ]
+        },
+        termination_criterion: !obj:pylearn2.termination_criteria.And {
+            criteria: [
+                !obj:pylearn2.termination_criteria.EpochCounter {
+                    max_epochs: %(max_epochs)i
+                },
+                # !obj:pylearn2.termination_criteria.BatchCounter {
+                #     max_batches: %(max_batches)i
+                # },
+            ]
+        },
+    }
+}
+
+
