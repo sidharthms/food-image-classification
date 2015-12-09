@@ -59,6 +59,15 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
             default = ('b', 0, 1, 'c')
             return b01c.transpose(*[default.index(axis) for axis in axes])
 
+        # uectrain = load_zipped_pickle(path + 'UECTestInstance.gz')
+        # uectrain = np.array(uectrain).astype(dtype=np.uint8)
+        # uectrain.tofile(path + 'UECTestInstance.bin')
+
+        # print 'original length', len(uectrain)
+        # pdb.set_trace()
+        # save_zipped_pickle(path + 'UECTrainInstance1.gz', uectrain[:6000])
+        # save_zipped_pickle(path + 'UECTrainInstance2.gz', uectrain[6000:12000])
+
         # uectrain = load_zipped_pickle(path + 'UECTrainInstance.gz')
         # print 'original length', len(uectrain)
         # pdb.set_trace()
@@ -71,10 +80,13 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
         # save_zipped_pickle(path + 'UECTestInstance1.gz', uectest[:1000])
         # save_zipped_pickle(path + 'UECTestInstance2.gz', uectest[1000:2000])
 
-        # mittrain = load_zipped_pickle(path + 'MITTrainInstance.gz')
-        # print 'original length', len(mittrain)
-        # pdb.set_trace()
-        # save_zipped_pickle(path + 'MITTrainInstance.gz', mittrain[:7000])
+        # mit = load_zipped_pickle(path + 'MITTrainInstance.gz')
+        # mit = np.array(mit).astype(dtype=np.uint8)
+        # mit.tofile(path + 'MITTrainInstance.bin')
+
+        # mit = load_zipped_pickle(path + 'MITTestInstance.gz')
+        # mit = np.array(mit).astype(dtype=np.uint8)
+        # mit.tofile(path + 'MITTestInstance.bin')
 
         # mittest = load_zipped_pickle(path + 'MITTrainInstance.gz')
         # print 'original length', len(mittest)
@@ -82,49 +94,41 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
         # save_zipped_pickle(path + 'MITTrainInstance.gz', mittest[:1166])
 
         if which_set == 'train':
-            im_path1_1 = path + 'UECTrainInstance1.gz'
-            im_path1_2 = path + 'UECTrainInstance2.gz'
+            im_path1 = path + 'UECTrainInstance.bin'
             im_path2 = path + 'stl10_binary/train_X.bin'
-            im_path3 = path + 'MITTrainInstance.gz'
+            im_path3 = path + 'MITTrainInstance.bin'
             lenx = 24000
-            lenpos1 = 6000
-            lenpos2 = 6000
+            lenpos = 12000
             lenneg1 = 5000
             lenneg2 = 7000
         else:
             assert which_set == 'test'
-            im_path1_1 = path + 'UECTestInstance1.gz'
-            im_path1_2 = path + 'UECTestInstance2.gz'
+            im_path1 = path + 'UECTestInstance.bin'
             im_path2 = path + 'stl10_binary/test_X.bin'
-            im_path3 = path + 'MITTestInstance.gz'
+            im_path3 = path + 'MITTestInstance.bin'
             lenx = 4000
-            lenpos1 = 1000
-            lenpos2 = 1000
+            lenpos = 2000
             lenneg1 = 834
             lenneg2 = 1166
 
-        X = np.zeros((lenx,) + self.img_shape, dtype=dtype)
-        Y = np.zeros((lenx, 1), dtype=dtype)
+        X = np.zeros((lenx,) + self.img_shape, dtype=np.uint8)
+        Y = np.zeros((lenx, 1), dtype=np.uint8)
 
+        pdb.set_trace()
         time1 = time.time()
-        print 'Loading positive samples set 1'
+        print 'Loading positive samples set'
         s = 0
-        X[s:lenpos1] = load_zipped_pickle(im_path1_1)
-        Y[s:lenpos1] = np.ones([lenpos1, 1])
-
-        print 'Loading positive samples set 2'
-        s += lenpos1
-        X[s:s + lenpos2] = load_zipped_pickle(im_path1_2)
-        Y[s:s + lenpos2] = np.ones([lenpos2, 1])
+        X[s:lenpos] = np.fromfile(im_path1, dtype=np.uint8).reshape((-1, 96, 96, 3))[:lenpos]
+        Y[s:lenpos] = np.ones([lenpos, 1])
 
         print 'Loading negative samples set 1'
-        s += lenpos2
+        s += lenpos
         X[s:s + lenneg1] = stl10_input.read_all_images(im_path2)[:lenneg1]
         Y[s:s + lenneg1] = np.zeros([lenneg1, 1])
 
         print 'Loading negative samples set 2'
         s += lenneg1
-        X[s:s + lenneg2] = load_zipped_pickle(im_path3)
+        X[s:s + lenneg2] = np.fromfile(im_path3, dtype=np.uint8).reshape((-1, 96, 96, 3))[:lenneg2]
         Y[s:s + lenneg2] = np.zeros([lenneg2, 1])
 
         assert s + lenneg2 == lenx
@@ -238,4 +242,13 @@ def load_zipped_pickle(filename):
 
 def save_zipped_pickle(filename, obj, protocol=2):
     with gzip.open(filename, 'wb') as f:
+        cPickle.dump(obj, f, protocol)
+
+def load_pickle(filename):
+    with open(filename, 'rb') as f:
+        loaded_object = cPickle.load(f)
+        return loaded_object
+
+def save_pickle(filename, obj, protocol=2):
+    with open(filename, 'wb') as f:
         cPickle.dump(obj, f, protocol)
