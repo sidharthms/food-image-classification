@@ -12,11 +12,11 @@ excetionList = ["bakery","bar","buffet","casino","deli","dining_room","fastfood_
 folders = [entry for entry in os.listdir(base)]
 target = './Food'
 
-dataTestX = []
-dataTestY = []
+TEST_SIZE = 1166
+TRAIN_SIZE = 7000
 
+dataTestX = []
 dataTrainX = []
-dataTrainY = []
 
 counter = 0
 
@@ -37,21 +37,21 @@ for folder in folders:
 
             originIm = Image.open(originfile)
             cropped = ImageOps.fit(originIm, (96, 96), Image.ANTIALIAS)
-            if cropped.size == (96, 96, 3):
+            img_data = np.array(cropped.getdata(), np.uint8)
+            if img_data.size == 27648:
                 if counter % 7 == 0:
-                    dataTestX.append(np.array(cropped.getdata(), np.uint8).reshape(cropped.size[1], cropped.size[0], 3))
-                    dataTestY.append(np.array([0]))
+                    if len(dataTestX) < TEST_SIZE:
+                        dataTestX.append(img_data.reshape(cropped.size[1], cropped.size[0], 3))
                 else:
-                    dataTrainX.append(np.array(cropped.getdata(), np.uint8).reshape(cropped.size[1],
-                                                                                    cropped.size[0], 3))
-                    dataTrainY.append(np.array([0]))
-
+                    if len(dataTrainX) < TRAIN_SIZE:
+                        dataTrainX.append(img_data.reshape(cropped.size[1], cropped.size[0], 3))
                 counter += 1
+            else:
+                print 'Skipped file', file
 
-dataTrainX = dataTrainX[:8000]
-dataTrainY = dataTrainY[:8000]
-dataTestX = dataTestX[:2000]
-dataTestY = dataTestY[:2000]
+dataTrainX = dataTrainX
+dataTestX = dataTestX
+pdb.set_trace()
 
-save_zipped_pickle("MITTrainInstance.gz", [dataTrainX, dataTrainY])
-save_zipped_pickle("MITTestInstance.gz", [dataTestX, dataTestY])
+save_zipped_pickle("MITTrainInstance.gz", dataTrainX)
+save_zipped_pickle("MITTestInstance.gz", dataTestX)

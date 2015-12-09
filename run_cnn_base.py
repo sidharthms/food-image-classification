@@ -12,14 +12,24 @@ seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000))
 default_seed = [2012, 11, 6, 9]
 k = 50
 
+default_args = {
+    'max_norm_h2': numpy.array([1.09]),
+    'max_norm_y': numpy.array([2]),
+    'l_ir_h2': numpy.array([-1.55]),
+    'l_ir_y': numpy.array([-2.16]),
+    'l_wdecay_h2': numpy.array([-4.178]),
+    'l_wdecay_y': numpy.array([-3.03]),
+    'log_init_learning_rate': [-4]
+}
+
 misclass_channel = 'valid_y_misclass'
 
 def main(job_id, params, cache):
     if 'cached_trainer' not in cache:
         train_params = {
-            'train_stop': 40000,
-            'valid_stop': 50000,
-            'test_stop': 10000,
+            'train_stop': 20000,
+            'valid_stop': 24000,
+            'test_stop': 4000,
             'batch_size': 100,
             'max_epochs': 2,
             'max_batches': 10,
@@ -28,16 +38,16 @@ def main(job_id, params, cache):
 
             'kernel_size_h2': 5,
             'output_channels_h2': 1 * k,
-            'irange_h2': math.pow(10, params['log_irange_h2'][0]),
-            'max_kernel_norm_h2': params['max_kernel_norm_h2'][0],
+            'irange_h2': math.pow(10, params['l_ir_h2'][0]),
+            'max_kernel_norm_h2': params['max_norm_h2'][0],
 
-            'weight_decay_h2': math.pow(10, params['log_weight_decay_h2'][0]),
-            'weight_decay_y': math.pow(10, params['log_weight_decay_y'][0]),
-            'max_col_norm_y': params['max_col_norm_y'][0],
-            'irange_y': math.pow(10, params['log_irange_y'][0]),
+            'weight_decay_h2': math.pow(10, params['l_wdecay_h2'][0]),
+            'weight_decay_y': math.pow(10, params['l_wdecay_y'][0]),
+            'max_col_norm_y': params['max_norm_y'][0],
+            'irange_y': math.pow(10, params['l_ir_y'][0]),
             'init_learning_rate': math.pow(10, params['log_init_learning_rate'][0]),
-            'init_momentum': params['init_momentum'][0],
-            'rectifier_left_slope': 0.1
+            'init_momentum': 0.5,
+            'rectifier_left_slope': 0.2
         }
 
         with open('conv_fooddata_spearmint.yaml', 'r') as f:
@@ -88,13 +98,4 @@ def main(job_id, params, cache):
     return float(original_misclass)
 
 if __name__ == "__main__":
-    main(0, {
-        'log_irange_h2': [-2],
-        'log_irange_y': [-4],
-        'max_kernel_norm_h2': [2],
-        'max_col_norm_y': [2],
-        'log_weight_decay_h2': [-6],
-        'log_weight_decay_y': [-6],
-        'log_init_learning_rate': [-4],
-        'init_momentum': [0.6]
-    }, {})
+    main(0, default_args, {})
