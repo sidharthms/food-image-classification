@@ -21,6 +21,7 @@
                      pool_shape: [2, 2],
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
+                     W_lr_scale: %(w_lr_sc_h2)f,
                      max_kernel_norm: %(max_kernel_norm_h2)f,
                      tied_b: True,
                  }, !obj:pylearn2.models.mlp.ConvRectifiedLinear {
@@ -88,13 +89,9 @@
                  model: *model
              }
          ],
-        cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
-            !obj:pylearn2.costs.cost.MethodCost {
-                method: 'cost_from_X'
-            }, !obj:pylearn2.costs.mlp.WeightDecay {
-                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_h4)f, %(weight_decay_y)f ]
-            }
-            ]
+        cost: !obj:pylearn2.costs.mlp.dropout.Dropout {
+            input_include_probs: { 'h2': %(dropout_h2)f, 'h3': %(dropout_h3)f, 'h4': %(dropout_h4)f },
+            input_scales: { 'h2': %(dscale_h2)f, 'h3': %(dscale_h3)f, 'h4': %(dscale_h4)f }
         },
         termination_criterion: !obj:pylearn2.termination_criteria.And {
             criteria: [

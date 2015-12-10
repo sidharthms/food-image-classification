@@ -52,7 +52,7 @@ def main(job_id, params, cache):
         'valid_stop': 24000,
         'test_stop': 4000,
         'batch_size': 100,
-        'max_epochs': 100,
+        'max_epochs': 5,
         'max_batches': 10,
         'sgd_seed': seed_str,
         'save_file': 'result',
@@ -73,7 +73,7 @@ def main(job_id, params, cache):
     train_obj.setup()
     train_obj.model.monitor.on_channel_conflict = 'ignore'
 
-    train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
+    # train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
     original_misclass = read_channel(train_obj.model, misclass_channel)
     return float(original_misclass)

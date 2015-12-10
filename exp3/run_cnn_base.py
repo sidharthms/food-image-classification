@@ -28,16 +28,16 @@ additional_args = {
 }
 
 default_args = {
-    'max_norm_h2': numpy.array([1.0]),
-    'max_norm_h3': numpy.array([5.94]),
-    'max_norm_h4': numpy.array([5.9448]),
-    'max_norm_y': numpy.array([1.0]),
-    'l_ir_h2': numpy.array([-1.1]),
-    'l_ir_h3': numpy.array([-1.3]),
-    'l_ir_h4': numpy.array([-1.3586]),
-    'l_ir_y': numpy.array([-5.5]),
-    'log_init_learning_rate': numpy.array([-5]),
-    'init_momentum': numpy.array([0.7])
+    'max_norm_h2': numpy.array([4.3068]),
+    'max_norm_h3': numpy.array([2.6037]),
+    'max_norm_h4': numpy.array([6.0473]),
+    'max_norm_y': numpy.array([2.1234]),
+    'l_ir_h2': numpy.array([-1.2090]),
+    'l_ir_h3': numpy.array([-2.8126]),
+    'l_ir_h4': numpy.array([-1.0350]),
+    'l_ir_y': numpy.array([-2.0]),
+    'log_init_learning_rate': numpy.array([-5.9872]),
+    'init_momentum': numpy.array([0.8])
 }
 
 misclass_channel = 'valid_y_misclass'
