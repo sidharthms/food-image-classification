@@ -9,9 +9,10 @@ import sys
 
 __author__ = 'sidharth'
 
-seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
-           str(random.randrange(1000)) + ']'
-default_seed = [2012, 11, 6, 9]
+sgd_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
+               str(random.randrange(1000)) + ']'
+mlp_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
+               str(random.randrange(1000)) + ']'
 k = 70
 
 additional_args = {
@@ -44,8 +45,12 @@ def update_conv_layer(layer, log_range, norm, model_params, rng):
                                       layer.kernel_shape[0],
                                       layer.kernel_shape[1])).astype(numpy.float32)
     model_params[layer.layer_name + '_W'].set_value(W)
-    model_params[layer.layer_name + '_b'].set_value(numpy.zeros(layer.detector_space.num_channels)
-                                                    .astype(numpy.float32) + layer.init_bias)
+    if layer.tied_b:
+        model_params[layer.layer_name + '_b'].set_value(numpy.zeros(layer.detector_space.num_channels)
+                                                        .astype(numpy.float32) + layer.init_bias)
+    else:
+        model_params[layer.layer_name + '_b'].set_value(layer.detector_space.get_origin() + layer.init_bias)
+
     if norm is not None:
         layer.extensions[0].max_limit.set_value(norm.astype(numpy.float32))
 
@@ -75,9 +80,10 @@ def main(job_id, params, cache):
             'valid_stop': 24000,
             'test_stop': 4000,
             'batch_size': 100,
-            'max_epochs': 2,
+            'max_epochs': 3,
             'max_batches': 10,
-            'sgd_seed': seed_str,
+            'sgd_seed': sgd_seed_str,
+            'mlp_seed': mlp_seed_str,
             'save_file': 'result',
 
             'kernel_size_h2': int(params['kernel_size_h2'][0]),
@@ -132,7 +138,7 @@ def main(job_id, params, cache):
     train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
     original_misclass = read_channel(train_obj.model, misclass_channel)
-    return float(original_misclass)
+    return float(original_misclass) * 50
 
 if __name__ == "__main__":
     main(0, default_args, {})

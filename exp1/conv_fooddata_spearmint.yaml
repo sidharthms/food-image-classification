@@ -12,6 +12,7 @@
             shape: &window_shape [96, 96],
             num_channels: 3,
         },
+        seed: %(mlp_seed)s,
         layers: [ !obj:pylearn2.models.mlp.ConvRectifiedLinear {
                      layer_name: 'h2',
                      output_channels: %(output_channels_h2)i,
@@ -21,6 +22,7 @@
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
                      max_kernel_norm: %(max_kernel_norm_h2)f,
+                     tied_b: True,
                  }, !obj:pylearn2.models.mlp.ConvRectifiedLinear {
                      layer_name: 'h3',
                      output_channels: %(output_channels_h3)i,
@@ -30,6 +32,7 @@
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
                      max_kernel_norm: %(max_kernel_norm_h2)f,
+                     tied_b: True,
                  }, !obj:pylearn2.models.mlp.Softmax {
                      max_col_norm: %(max_col_norm_y)f,
                      layer_name: 'y',

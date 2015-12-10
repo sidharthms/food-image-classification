@@ -1,18 +1,19 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "cifar10_exp1",
+    "experiment-name" : "food_classification_exp1",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {
             "scheduler"         : "managed",
-            "max-concurrent"    : 2
+            "max-concurrent"    : 2,
+            "gpus"              : 2
         }
     },
     "tasks": {
         "cifar10" : {
             "type"       : "OBJECTIVE",
             "likelihood" : "GAUSSIAN",
-            "main-file"  : "run_cifar10",
+            "main-file"  : "run_cnn_base",
             "resources"  : ["my-machine"]
         }
     },
@@ -33,7 +34,7 @@
             "type" : "FLOAT",
             "size" : 1,
             "min"  : 0.5,
-            "max"  : 5
+            "max"  : 3
         },
         "l_ir_h3" : {
             "type" : "FLOAT",
@@ -45,7 +46,7 @@
             "type" : "FLOAT",
             "size" : 1,
             "min"  : 0.5,
-            "max"  : 5
+            "max"  : 3
         },
         "l_ir_y" : {
             "type" : "FLOAT",
