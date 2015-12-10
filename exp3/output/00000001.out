@@ -1,0 +1,49 @@
+Input shape: (96, 96)
+Detector space: (92, 92)
+Output space: (46, 46)
+Input shape: (46, 46)
+Detector space: (42, 42)
+Output space: (21, 21)
+Input shape: (21, 21)
+Detector space: (17, 17)
+Output space: (9, 9)
+Loading data took 135.982 ms
+Loading data took 135.161 ms
+Parameter and initial learning rate summary:
+	h2_W: 0.0
+	h2_b: 0.0
+	h3_W: 0.0
+	h3_b: 0.0
+	h4_W: 0.0
+	h4_b: 0.0
+	softmax_b: 0.0
+	softmax_W: 0.0
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 9.516008 seconds
+Time this epoch: 0:01:57.211531
+compiling begin_record_entry...
+compiling begin_record_entry done. Time elapsed: 0.050316 seconds
+Monitored channels: 
+	learning_rate
+	momentum
+	total_seconds_last_epoch
+	training_seconds_this_epoch
+	valid_objective
+	valid_term_0
+	valid_term_1_weight_decay
+	valid_y_misclass
+Compiling accum...
+graph size: 192
+Compiling accum done. Time elapsed: 1.446911 seconds
+Monitoring step:
+	Epochs seen: 1
+	Batches seen: 200
+	Examples seen: 20000
+	learning_rate: 0.0
+	momentum: 0.0
+	total_seconds_last_epoch: 0.0
+	training_seconds_this_epoch: 117.211585999
+	valid_objective: 0.69314801693
+	valid_term_0: 0.693147182465
+	valid_term_1_weight_decay: 1.12005443498e-06
+	valid_y_misclass: 0.518999993801

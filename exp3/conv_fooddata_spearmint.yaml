@@ -33,6 +33,16 @@
                      left_slope: %(rectifier_left_slope)f,
                      max_kernel_norm: %(max_kernel_norm_h3)f,
                      tied_b: True,
+                 }, !obj:pylearn2.models.mlp.ConvRectifiedLinear {
+                     layer_name: 'h4',
+                     output_channels: %(output_channels_h4)i,
+                     irange: %(irange_h4)f,
+                     kernel_shape: [%(kernel_size_h4)f, %(kernel_size_h4)f],
+                     pool_shape: [2, 2],
+                     pool_stride: [2, 2],
+                     left_slope: %(rectifier_left_slope)f,
+                     max_kernel_norm: %(max_kernel_norm_h4)f,
+                     tied_b: True,
                  }, !obj:pylearn2.models.mlp.Softmax {
                      max_col_norm: %(max_col_norm_y)f,
                      layer_name: 'y',
@@ -82,7 +92,7 @@
             !obj:pylearn2.costs.cost.MethodCost {
                 method: 'cost_from_X'
             }, !obj:pylearn2.costs.mlp.WeightDecay {
-                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_y)f ]
+                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_h4)f, %(weight_decay_y)f ]
             }
             ]
         },

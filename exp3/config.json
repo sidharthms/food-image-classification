@@ -1,6 +1,6 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_exp1",
+    "experiment-name" : "food_classification_exp3",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {
@@ -21,22 +21,34 @@
         "max_norm_h2" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.3,
-            "max"  : 2.5
+            "min"  : 1,
+            "max"  : 6
         },
         "l_ir_h2" : {
             "type" : "FLOAT",
             "size" : 1,
             "min"  : -3,
-            "max"  : 0.5
+            "max"  : 1
         },
         "max_norm_h3" : {
             "type" : "FLOAT",
             "size" : 1,
             "min"  : 1,
-            "max"  : 6
+            "max"  : 8
         },
         "l_ir_h3" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -3,
+            "max"  : 0.5
+        },
+        "max_norm_h4" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 1,
+            "max"  : 8
+        },
+        "l_ir_h4" : {
             "type" : "FLOAT",
             "size" : 1,
             "min"  : -3,
@@ -45,20 +57,26 @@
         "max_norm_y" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.2,
-            "max"  : 2.5
+            "min"  : 0.3,
+            "max"  : 4
         },
         "l_ir_y" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : -7,
+            "min"  : -6,
             "max"  : -2
         },
         "log_init_learning_rate" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : -6.5,
+            "min"  : -8,
             "max"  : -3
+        },
+        "init_momentum" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0,
+            "max"  : 0.9
         }
     }
 }

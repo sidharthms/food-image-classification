@@ -15,24 +15,29 @@ sgd_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(10
                str(random.randrange(1000)) + ']'
 mlp_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
                str(random.randrange(1000)) + ']'
-k = 70
+k = 150
 
 additional_args = {
-    'l_wdecay_h2': numpy.array([-4]),
-    'l_wdecay_h3': numpy.array([-5]),
-    'l_wdecay_y': numpy.array([-3]),
+    'l_wdecay_h2': numpy.array([-6]),
+    'l_wdecay_h3': numpy.array([-6]),
+    'l_wdecay_h4': numpy.array([-6]),
+    'l_wdecay_y': numpy.array([-6]),
     'kernel_size_h2': ['5'],
     'kernel_size_h3': ['5'],
+    'kernel_size_h4': ['5']
 }
 
 default_args = {
     'max_norm_h2': numpy.array([1.0]),
-    'max_norm_h3': numpy.array([5.8572]),
+    'max_norm_h3': numpy.array([5.94]),
+    'max_norm_h4': numpy.array([5.9448]),
     'max_norm_y': numpy.array([1.0]),
-    'l_ir_h2': numpy.array([-1.1128]),
-    'l_ir_h3': numpy.array([-1.3046]),
-    'l_ir_y': numpy.array([-5.5159]),
-    'log_init_learning_rate': numpy.array([-4.7705])
+    'l_ir_h2': numpy.array([-1.1]),
+    'l_ir_h3': numpy.array([-1.3]),
+    'l_ir_h4': numpy.array([-1.3586]),
+    'l_ir_y': numpy.array([-5.5]),
+    'log_init_learning_rate': numpy.array([-5]),
+    'init_momentum': numpy.array([0.7])
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -92,17 +97,23 @@ def main(job_id, params, cache):
             'max_kernel_norm_h2': params['max_norm_h2'][0],
 
             'kernel_size_h3': int(params['kernel_size_h3'][0]),
-            'output_channels_h3': int(1.5 * k),
+            'output_channels_h3': int(1.7 * k),
             'irange_h3': math.pow(10, params['l_ir_h3'][0]),
             'max_kernel_norm_h3': params['max_norm_h3'][0],
 
+            'kernel_size_h4': int(params['kernel_size_h4'][0]),
+            'output_channels_h4': int(2.5 * k),
+            'irange_h4': math.pow(10, params['l_ir_h4'][0]),
+            'max_kernel_norm_h4': params['max_norm_h4'][0],
+
             'weight_decay_h2': math.pow(10, params['l_wdecay_h2'][0]),
             'weight_decay_h3': math.pow(10, params['l_wdecay_h3'][0]),
+            'weight_decay_h4': math.pow(10, params['l_wdecay_h4'][0]),
             'weight_decay_y': math.pow(10, params['l_wdecay_y'][0]),
             'max_col_norm_y': params['max_norm_y'][0],
             'irange_y': math.pow(10, params['l_ir_y'][0]),
             'init_learning_rate': math.pow(10, params['log_init_learning_rate'][0]),
-            'init_momentum': 0.5,
+            'init_momentum': params['init_momentum'][0],
             'rectifier_left_slope': 0.2
         }
 
@@ -133,11 +144,12 @@ def main(job_id, params, cache):
 
         update_conv_layer(model.layers[0], params['l_ir_h2'][0], params['max_norm_h2'][0], model_params, rng)
         update_conv_layer(model.layers[1], params['l_ir_h3'][0], params['max_norm_h3'][0], model_params, rng)
-        update_softmax_layer(model.layers[2], params['l_ir_y'][0], params['max_norm_y'][0], model_params, rng)
+        update_conv_layer(model.layers[2], params['l_ir_h4'][0], params['max_norm_h4'][0], model_params, rng)
+        update_softmax_layer(model.layers[3], params['l_ir_y'][0], params['max_norm_y'][0], model_params, rng)
 
         train_obj.algorithm.learning_rate.set_value(
                 math.pow(10, params['log_init_learning_rate'][0].astype(numpy.float32)))
-        # train_obj.algorithm.learning_rule.momentum.set_value(params['init_momentum'][0].astype(numpy.float32))
+        train_obj.algorithm.learning_rule.momentum.set_value(params['init_momentum'][0].astype(numpy.float32))
         pass
 
     if 'converge' not in params:

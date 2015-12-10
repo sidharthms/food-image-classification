@@ -1,0 +1,13 @@
+Time this epoch: 0:01:59.212635
+Monitoring step:
+	Epochs seen: 1
+	Batches seen: 200
+	Examples seen: 20000
+	learning_rate: 0.00100000039674
+	momentum: 0.899731934071
+	total_seconds_last_epoch: 136.232299805
+	training_seconds_this_epoch: 119.212638855
+	valid_objective: 1.080e+10
+	valid_term_0: 1.080e+10
+	valid_term_1_weight_decay: 0.0457519777119
+	valid_y_misclass: 0.511499941349
