@@ -37,12 +37,12 @@
         update_callbacks: [
             !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
                 model: *model,
-                tick_rate: 1,
-                monitor_rate: 100
+                tick_rate: 10,
+                # monitor_rate: 100
             },
-            !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
-                model: *model
-            }
+            # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
+            #     model: *model
+            # }
         ],
         pre_update_callbacks: [
             !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {

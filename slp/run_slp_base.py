@@ -52,7 +52,7 @@ def main(job_id, params, cache):
         'valid_stop': 24000,
         'test_stop': 4000,
         'batch_size': 100,
-        'max_epochs': 2,
+        'max_epochs': 100,
         'max_batches': 10,
         'sgd_seed': seed_str,
         'save_file': 'result',
