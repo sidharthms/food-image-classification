@@ -35,7 +35,7 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
     fit_test_preprocessor : WRITEME
     """
 
-    def __init__(self, which_set, start=None, stop=None, center=False, rescale=False, shuffle=True, path='./',
+    def __init__(self, which_set, start=None, stop=None, center=False, rescale=False, path='./',
                  axes=('b', 0, 1, 'c')):
         # we define here:
         dtype = 'uint8'
@@ -94,47 +94,20 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
         # save_zipped_pickle(path + 'MITTrainInstance.gz', mittest[:1166])
 
         if which_set == 'train':
-            im_path1 = path + 'UECTrainInstance.bin'
-            im_path2 = path + 'stl10_binary/train_X.bin'
-            im_path3 = path + 'MITTrainInstance.bin'
-            lenx = 24000
-            lenpos = 12000
-            lenneg1 = 5000
-            lenneg2 = 7000
+            im_path = path + 'train_images.bin'
+            y_path = path + 'train_labels.bin'
         else:
             assert which_set == 'test'
-            im_path1 = path + 'UECTestInstance.bin'
-            im_path2 = path + 'stl10_binary/test_X.bin'
-            im_path3 = path + 'MITTestInstance.bin'
-            lenx = 4000
-            lenpos = 2000
-            lenneg1 = 834
-            lenneg2 = 1166
+            im_path = path + 'train_images.bin'
+            y_path = path + 'train_labels.bin'
 
-        X = np.zeros((lenx,) + self.img_shape, dtype=np.uint8)
-        Y = np.zeros((lenx, 1), dtype=np.uint8)
-
-        pdb.set_trace()
         time1 = time.time()
-        print 'Loading positive samples set'
-        s = 0
-        X[s:lenpos] = np.fromfile(im_path1, dtype=np.uint8).reshape((-1, 96, 96, 3))[:lenpos]
-        Y[s:lenpos] = np.ones([lenpos, 1])
-
-        print 'Loading negative samples set 1'
-        s += lenpos
-        X[s:s + lenneg1] = stl10_input.read_all_images(im_path2)[:lenneg1]
-        Y[s:s + lenneg1] = np.zeros([lenneg1, 1])
-
-        print 'Loading negative samples set 2'
-        s += lenneg1
-        X[s:s + lenneg2] = np.fromfile(im_path3, dtype=np.uint8).reshape((-1, 96, 96, 3))[:lenneg2]
-        Y[s:s + lenneg2] = np.zeros([lenneg2, 1])
-
-        assert s + lenneg2 == lenx
+        X = np.fromfile(im_path, dtype=np.uint8).reshape((-1, 96, 96, 3))
+        Y = np.fromfile(y_path, dtype=np.uint8).reshape((-1, 1))
 
         time2 = time.time()
         print 'Loading data took %0.3f ms' % ((time2-time1)*1000.0)
+        pdb.set_trace()
 
         y_labels = 2
 
@@ -142,28 +115,6 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
         assert r == 96
         assert c == 96
         assert l == 3
-
-        # if which_set == 'train':
-        #     assert m == 60000
-        # elif which_set == 'test':
-        #     assert m == 10000
-        # else:
-        #     assert False
-
-        self.shuffle = shuffle
-        if shuffle:
-            self.shuffle_rng = make_np_rng(
-                None, [1, 2, 3], which_method="shuffle")
-            for i in xrange(X.shape[0]):
-                j = self.shuffle_rng.randint(m)
-                # Copy ensures that memory is not aliased.
-                tmp = X[i, :, :, :].copy()
-                X[i, :, :, :] = X[j, :, :, :]
-                X[j, :, :, :] = tmp
-
-                tmp = Y[i:i + 1].copy()
-                Y[i] = Y[j]
-                Y[j] = tmp
 
         super(FoodData, self).__init__(topo_view=dimshuffle(X), y=Y, axes=axes, y_labels=y_labels)
 

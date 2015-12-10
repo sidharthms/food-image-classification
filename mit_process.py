@@ -51,7 +51,6 @@ for folder in folders:
 
 dataTrainX = dataTrainX
 dataTestX = dataTestX
-pdb.set_trace()
 
 save_zipped_pickle("MITTrainInstance.gz", dataTrainX)
 save_zipped_pickle("MITTestInstance.gz", dataTestX)
