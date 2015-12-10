@@ -1,0 +1,76 @@
+!obj:pylearn2.train.Train {
+    dataset: &train !obj:fooddata.FoodData {
+        which_set: 'train',
+        start: 0,
+        stop: %(train_stop)i,
+        path: '../',
+    },
+    model: &model !obj:pylearn2.models.mlp.MLP {
+        batch_size: %(batch_size)i,
+        monitor_only_misclass: True,
+        input_space: !obj:pylearn2.space.Conv2DSpace {
+            shape: &window_shape [96, 96],
+            num_channels: 3,
+        },
+        layers: [!obj:pylearn2.models.mlp.Sigmoid {
+                     layer_name: 'h1',
+                     dim: %(dim_h1)i,
+                     irange: %(irange_h1)f,
+                     max_col_norm: %(max_col_norm_h1)f
+                 }, !obj:pylearn2.models.mlp.Sigmoid {
+                     layer_name: 'h2',
+                     dim: %(dim_h2)i,
+                     irange: %(irange_h2)f,
+                     max_col_norm: %(max_col_norm_h2)f
+                 }, !obj:pylearn2.models.mlp.Softmax {
+                     max_col_norm: %(max_col_norm_y)f,
+                     layer_name: 'y',
+                     n_classes: 2,
+                     irange:  %(irange_y)f
+                 }
+                ],
+    },
+    algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+        batch_size: %(batch_size)i,
+        learning_rate: %(init_learning_rate)f,
+        learning_rule: !obj:pylearn2.training_algorithms.learning_rule.Momentum {
+            init_momentum: %(init_momentum)f,
+            nesterov_momentum: True
+        },
+        seed: %(sgd_seed)s,
+        train_iteration_mode: even_sequential,
+        monitoring_dataset:
+            {
+                'valid' : !obj:fooddata.FoodData {
+                              which_set: 'train',
+                              start: %(train_stop)i,
+                              stop:  %(valid_stop)i,
+                              path: '../',
+                          }
+            },
+        update_callbacks: [
+            !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
+                model: *model,
+                tick_rate: 10,
+                # monitor_rate: 100
+            },
+            # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
+            #     model: *model
+            # }
+        ],
+        pre_update_callbacks: [
+            !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
+                model: *model
+            }
+        ],
+        termination_criterion: !obj:pylearn2.termination_criteria.And {
+            criteria: [
+                !obj:pylearn2.termination_criteria.EpochCounter {
+                    max_epochs: %(max_epochs)i
+                },
+            ]
+        },
+    }
+}
+
+
