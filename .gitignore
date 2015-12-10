@@ -5,3 +5,4 @@ stl10_binary
 *.pkl
 *.pyc
 *.bin
+.idea
