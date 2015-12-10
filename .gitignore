@@ -1,6 +1,7 @@
 UECFOOD100
 MIT
 stl10_binary
+*.out
 *.gz
 *.pkl
 *.pyc
