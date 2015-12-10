@@ -1,6 +1,6 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_exp3",
+    "experiment-name" : "food_classification_expr3.1",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {
@@ -18,11 +18,10 @@
         }
     },
     "variables": {
-        "max_norm_h2" : {
-            "type" : "FLOAT",
+        "kernel_config": {
+            "type" : "ENUM",
             "size" : 1,
-            "min"  : 1,
-            "max"  : 6
+            "options" : ["a", "b", "c", "d"]
         },
         "l_ir_h2" : {
             "type" : "FLOAT",
@@ -65,18 +64,6 @@
             "size" : 1,
             "min"  : -6,
             "max"  : -2
-        },
-        "log_init_learning_rate" : {
-            "type" : "FLOAT",
-            "size" : 1,
-            "min"  : -8,
-            "max"  : -3
-        },
-        "init_momentum" : {
-            "type" : "FLOAT",
-            "size" : 1,
-            "min"  : 0,
-            "max"  : 0.9
         }
     }
 }

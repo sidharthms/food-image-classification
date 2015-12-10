@@ -1,0 +1,1030 @@
+Using gpu device 0: GeForce GTX TITAN X
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/utils/image.py:16: UserWarning: Unable to import matplotlib. Some features unavailable. Original exception: could not open display
+  "Original exception: " + str(matplotlib_exception))
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/model_extensions/norm_constraint.py:97: UserWarning: MaxL2FilterNorm is deprecated and may be removed on or after 2016-01-31. Use ConstrainFilterL2Norm.
+  warnings.warn("MaxL2FilterNorm is deprecated and may be removed on or"
+Input shape: (96, 96)
+Detector space: (92, 92)
+Output space: (46, 46)
+Input shape: (46, 46)
+Detector space: (42, 42)
+Output space: (21, 21)
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/costs/mlp/__init__.py:108: UserWarning: Coefficients should be given as a dictionary with layer names as key. The support of coefficients as list would be deprecated from 03/06/2015
+  warnings.warn("Coefficients should be given as a dictionary "
+Loading data took 23.060 ms
+Loading data took 136.501 ms
+Loading data took 138.405 ms
+Parameter and initial learning rate summary:
+	h2_W: 3.09999995807e-05
+	h2_b: 3.09999995807e-05
+	h3_W: 3.09999995807e-05
+	h3_b: 3.09999995807e-05
+	softmax_b: 3.09999995807e-05
+	softmax_W: 3.09999995807e-05
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 1.896980 seconds
+Time this epoch: 56.811684 seconds
+compiling begin_record_entry...
+compiling begin_record_entry done. Time elapsed: 0.054381 seconds
+Monitored channels: 
+	learning_rate
+	momentum
+	test_objective
+	test_term_0
+	test_term_1_weight_decay
+	test_y_misclass
+	total_seconds_last_epoch
+	train_objective
+	train_term_0
+	train_term_1_weight_decay
+	train_y_misclass
+	training_seconds_this_epoch
+	valid_objective
+	valid_term_0
+	valid_term_1_weight_decay
+	valid_y_misclass
+Compiling accum...
+graph size: 148
+graph size: 132
+graph size: 132
+Compiling accum done. Time elapsed: 2.571822 seconds
+Monitoring step:
+	Epochs seen: 1
+	Batches seen: 150
+	Examples seen: 15000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.637461543083
+	test_term_0: 0.634903311729
+	test_term_1_weight_decay: 0.00255822227336
+	test_y_misclass: 0.238249972463
+	total_seconds_last_epoch: 0.0
+	train_objective: 0.588303983212
+	train_term_0: 0.585745811462
+	train_term_1_weight_decay: 0.00255822576582
+	train_y_misclass: 0.235399931669
+	training_seconds_this_epoch: 56.8116798401
+	valid_objective: 0.64849448204
+	valid_term_0: 0.645936250687
+	valid_term_1_weight_decay: 0.00255822227336
+	valid_y_misclass: 0.238250002265
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.748758 seconds
+Time this epoch: 0:01:25.209711
+Monitoring step:
+	Epochs seen: 2
+	Batches seen: 300
+	Examples seen: 30000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.409297913313
+	test_term_0: 0.406738311052
+	test_term_1_weight_decay: 0.00255968398415
+	test_y_misclass: 0.173999994993
+	total_seconds_last_epoch: 146.640563965
+	train_objective: 0.337678402662
+	train_term_0: 0.335118710995
+	train_term_1_weight_decay: 0.00255968328565
+	train_y_misclass: 0.155066609383
+	training_seconds_this_epoch: 85.2096862793
+	valid_objective: 0.417644143105
+	valid_term_0: 0.415084540844
+	valid_term_1_weight_decay: 0.00255968398415
+	valid_y_misclass: 0.173249989748
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 0.890012 seconds
+Time this epoch: 0:01:25.429002
+Monitoring step:
+	Epochs seen: 3
+	Batches seen: 450
+	Examples seen: 45000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.306479781866
+	test_term_0: 0.30391818285
+	test_term_1_weight_decay: 0.00256160181016
+	test_y_misclass: 0.126249998808
+	total_seconds_last_epoch: 173.317245483
+	train_objective: 0.221863567829
+	train_term_0: 0.219301983714
+	train_term_1_weight_decay: 0.00256160181016
+	train_y_misclass: 0.0931333228946
+	training_seconds_this_epoch: 85.4290466309
+	valid_objective: 0.313028842211
+	valid_term_0: 0.310467213392
+	valid_term_1_weight_decay: 0.00256160181016
+	valid_y_misclass: 0.130750030279
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 0.904587 seconds
+Time this epoch: 0:01:26.656308
+Monitoring step:
+	Epochs seen: 4
+	Batches seen: 600
+	Examples seen: 60000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.267523407936
+	test_term_0: 0.264959782362
+	test_term_1_weight_decay: 0.00256361765787
+	test_y_misclass: 0.105999998748
+	total_seconds_last_epoch: 174.363952637
+	train_objective: 0.172017872334
+	train_term_0: 0.169454246759
+	train_term_1_weight_decay: 0.00256361765787
+	train_y_misclass: 0.0641333088279
+	training_seconds_this_epoch: 86.6562957764
+	valid_objective: 0.270778268576
+	valid_term_0: 0.268214672804
+	valid_term_1_weight_decay: 0.00256361765787
+	valid_y_misclass: 0.110499992967
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 0.900240 seconds
+Time this epoch: 0:01:26.556624
+Monitoring step:
+	Epochs seen: 5
+	Batches seen: 750
+	Examples seen: 75000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.2424890697
+	test_term_0: 0.239923432469
+	test_term_1_weight_decay: 0.00256562978029
+	test_y_misclass: 0.0952499955893
+	total_seconds_last_epoch: 174.53729248
+	train_objective: 0.138277709484
+	train_term_0: 0.135712072253
+	train_term_1_weight_decay: 0.00256563071162
+	train_y_misclass: 0.0460666678846
+	training_seconds_this_epoch: 86.5566711426
+	valid_objective: 0.242760553956
+	valid_term_0: 0.240194946527
+	valid_term_1_weight_decay: 0.00256562978029
+	valid_y_misclass: 0.0952499955893
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.273475 seconds
+Time this epoch: 0:01:26.740212
+Monitoring step:
+	Epochs seen: 6
+	Batches seen: 900
+	Examples seen: 90000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.229514166713
+	test_term_0: 0.226946562529
+	test_term_1_weight_decay: 0.00256759207696
+	test_y_misclass: 0.0892500057817
+	total_seconds_last_epoch: 175.865692139
+	train_objective: 0.117355443537
+	train_term_0: 0.114787846804
+	train_term_1_weight_decay: 0.00256758928299
+	train_y_misclass: 0.0361333265901
+	training_seconds_this_epoch: 86.740196228
+	valid_objective: 0.227187305689
+	valid_term_0: 0.224619671702
+	valid_term_1_weight_decay: 0.00256759207696
+	valid_y_misclass: 0.0894999951124
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.405407 seconds
+Time this epoch: 0:01:25.423342
+Monitoring step:
+	Epochs seen: 7
+	Batches seen: 1050
+	Examples seen: 105000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.214553043246
+	test_term_0: 0.211983531713
+	test_term_1_weight_decay: 0.00256949942559
+	test_y_misclass: 0.0787499919534
+	total_seconds_last_epoch: 176.232315063
+	train_objective: 0.0956552922726
+	train_term_0: 0.0930857807398
+	train_term_1_weight_decay: 0.00256950384937
+	train_y_misclass: 0.0238666646183
+	training_seconds_this_epoch: 85.4233093262
+	valid_objective: 0.20794993639
+	valid_term_0: 0.205380409956
+	valid_term_1_weight_decay: 0.00256949942559
+	valid_y_misclass: 0.0767500028014
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 2.603303 seconds
+Time this epoch: 0:01:26.522298
+Monitoring step:
+	Epochs seen: 8
+	Batches seen: 1200
+	Examples seen: 120000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.206870302558
+	test_term_0: 0.204298958182
+	test_term_1_weight_decay: 0.00257134414278
+	test_y_misclass: 0.0734999999404
+	total_seconds_last_epoch: 176.029678345
+	train_objective: 0.081133954227
+	train_term_0: 0.078562580049
+	train_term_1_weight_decay: 0.00257134577259
+	train_y_misclass: 0.0172000080347
+	training_seconds_this_epoch: 86.5223007202
+	valid_objective: 0.195400595665
+	valid_term_0: 0.192829251289
+	valid_term_1_weight_decay: 0.00257134414278
+	valid_y_misclass: 0.0707500055432
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.748744 seconds
+Time this epoch: 0:01:25.713559
+Monitoring step:
+	Epochs seen: 9
+	Batches seen: 1350
+	Examples seen: 135000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.204735308886
+	test_term_0: 0.202162176371
+	test_term_1_weight_decay: 0.00257312902249
+	test_y_misclass: 0.0745000094175
+	total_seconds_last_epoch: 174.948745728
+	train_objective: 0.0728031545877
+	train_term_0: 0.0702300220728
+	train_term_1_weight_decay: 0.00257312902249
+	train_y_misclass: 0.0144000118598
+	training_seconds_this_epoch: 85.7135314941
+	valid_objective: 0.190189853311
+	valid_term_0: 0.187616735697
+	valid_term_1_weight_decay: 0.00257312902249
+	valid_y_misclass: 0.0714999958873
+Time this epoch: 0:01:26.459857
+Monitoring step:
+	Epochs seen: 10
+	Batches seen: 1500
+	Examples seen: 150000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.204563438892
+	test_term_0: 0.201988592744
+	test_term_1_weight_decay: 0.00257485266775
+	test_y_misclass: 0.074500001967
+	total_seconds_last_epoch: 172.685760498
+	train_objective: 0.0666878297925
+	train_term_0: 0.0641129687428
+	train_term_1_weight_decay: 0.00257485103793
+	train_y_misclass: 0.0125333406031
+	training_seconds_this_epoch: 86.4598693848
+	valid_objective: 0.186655312777
+	valid_term_0: 0.184080511332
+	valid_term_1_weight_decay: 0.00257485266775
+	valid_y_misclass: 0.0699999928474
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.305754 seconds
+Time this epoch: 0:01:25.704578
+Monitoring step:
+	Epochs seen: 11
+	Batches seen: 1650
+	Examples seen: 165000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.202201217413
+	test_term_0: 0.199624732137
+	test_term_1_weight_decay: 0.0025765215978
+	test_y_misclass: 0.0727500095963
+	total_seconds_last_epoch: 174.913726807
+	train_objective: 0.0614184103906
+	train_term_0: 0.0588418729603
+	train_term_1_weight_decay: 0.00257652415894
+	train_y_misclass: 0.0109333386645
+	training_seconds_this_epoch: 85.7046203613
+	valid_objective: 0.185223206878
+	valid_term_0: 0.182646721601
+	valid_term_1_weight_decay: 0.0025765215978
+	valid_y_misclass: 0.0684999972582
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.157379 seconds
+Time this epoch: 0:01:24.683338
+Monitoring step:
+	Epochs seen: 12
+	Batches seen: 1800
+	Examples seen: 180000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.210536271334
+	test_term_0: 0.207958355546
+	test_term_1_weight_decay: 0.0025779476855
+	test_y_misclass: 0.0764999985695
+	total_seconds_last_epoch: 175.013824463
+	train_objective: 0.0665060803294
+	train_term_0: 0.0639281049371
+	train_term_1_weight_decay: 0.00257794861682
+	train_y_misclass: 0.0135333444923
+	training_seconds_this_epoch: 84.6833190918
+	valid_objective: 0.198377683759
+	valid_term_0: 0.195799723268
+	valid_term_1_weight_decay: 0.0025779476855
+	valid_y_misclass: 0.0732500106096
+Time this epoch: 0:01:26.543083
+Monitoring step:
+	Epochs seen: 13
+	Batches seen: 1950
+	Examples seen: 195000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.207499727607
+	test_term_0: 0.204920113087
+	test_term_1_weight_decay: 0.00257959612645
+	test_y_misclass: 0.0737499967217
+	total_seconds_last_epoch: 172.655014038
+	train_objective: 0.0595445111394
+	train_term_0: 0.0569649264216
+	train_term_1_weight_decay: 0.00257959961891
+	train_y_misclass: 0.0103333415464
+	training_seconds_this_epoch: 86.5430755615
+	valid_objective: 0.194848880172
+	valid_term_0: 0.192269280553
+	valid_term_1_weight_decay: 0.00257959612645
+	valid_y_misclass: 0.0730000063777
+Time this epoch: 0:01:25.804878
+Monitoring step:
+	Epochs seen: 14
+	Batches seen: 2100
+	Examples seen: 210000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.207780495286
+	test_term_0: 0.20519939065
+	test_term_1_weight_decay: 0.00258114282042
+	test_y_misclass: 0.0730000138283
+	total_seconds_last_epoch: 174.693649292
+	train_objective: 0.0559931248426
+	train_term_0: 0.0534119904041
+	train_term_1_weight_decay: 0.00258114025928
+	train_y_misclass: 0.0100000081584
+	training_seconds_this_epoch: 85.8048553467
+	valid_objective: 0.194788530469
+	valid_term_0: 0.192207410932
+	valid_term_1_weight_decay: 0.00258114282042
+	valid_y_misclass: 0.0717500150204
+Time this epoch: 0:01:25.722440
+Monitoring step:
+	Epochs seen: 15
+	Batches seen: 2250
+	Examples seen: 225000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.209311902523
+	test_term_0: 0.206729337573
+	test_term_1_weight_decay: 0.00258261663839
+	test_y_misclass: 0.0729999989271
+	total_seconds_last_epoch: 173.782180786
+	train_objective: 0.054016597569
+	train_term_0: 0.0514339879155
+	train_term_1_weight_decay: 0.00258261477575
+	train_y_misclass: 0.0095333410427
+	training_seconds_this_epoch: 85.7224349976
+	valid_objective: 0.196433648467
+	valid_term_0: 0.193851038814
+	valid_term_1_weight_decay: 0.00258261663839
+	valid_y_misclass: 0.073250003159
+Time this epoch: 0:01:26.532725
+Monitoring step:
+	Epochs seen: 16
+	Batches seen: 2400
+	Examples seen: 240000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.211447089911
+	test_term_0: 0.208863094449
+	test_term_1_weight_decay: 0.00258402805775
+	test_y_misclass: 0.0729999989271
+	total_seconds_last_epoch: 172.760559082
+	train_objective: 0.0527571924031
+	train_term_0: 0.050173163414
+	train_term_1_weight_decay: 0.00258402596228
+	train_y_misclass: 0.00986667443067
+	training_seconds_this_epoch: 86.532699585
+	valid_objective: 0.198783814907
+	valid_term_0: 0.196199774742
+	valid_term_1_weight_decay: 0.00258402805775
+	valid_y_misclass: 0.0737499967217
+Time this epoch: 0:01:25.196730
+Monitoring step:
+	Epochs seen: 17
+	Batches seen: 2550
+	Examples seen: 255000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.213736623526
+	test_term_0: 0.211151272058
+	test_term_1_weight_decay: 0.00258538033813
+	test_y_misclass: 0.0734999999404
+	total_seconds_last_epoch: 172.874969482
+	train_objective: 0.0517454706132
+	train_term_0: 0.0491600781679
+	train_term_1_weight_decay: 0.00258538499475
+	train_y_misclass: 0.0099333403632
+	training_seconds_this_epoch: 85.1967468262
+	valid_objective: 0.201251417398
+	valid_term_0: 0.198666036129
+	valid_term_1_weight_decay: 0.00258538033813
+	valid_y_misclass: 0.0742499902844
+Time this epoch: 0:01:26.048076
+Monitoring step:
+	Epochs seen: 18
+	Batches seen: 2700
+	Examples seen: 270000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.215926229954
+	test_term_0: 0.213339596987
+	test_term_1_weight_decay: 0.00258668651804
+	test_y_misclass: 0.0739999935031
+	total_seconds_last_epoch: 173.099960327
+	train_objective: 0.0507823973894
+	train_term_0: 0.0481957122684
+	train_term_1_weight_decay: 0.00258668931201
+	train_y_misclass: 0.010333340615
+	training_seconds_this_epoch: 86.0480575562
+	valid_objective: 0.203539013863
+	valid_term_0: 0.200952321291
+	valid_term_1_weight_decay: 0.00258668651804
+	valid_y_misclass: 0.0749999955297
+Time this epoch: 0:01:26.699780
+Monitoring step:
+	Epochs seen: 19
+	Batches seen: 2850
+	Examples seen: 285000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.21808552742
+	test_term_0: 0.21549756825
+	test_term_1_weight_decay: 0.00258794706315
+	test_y_misclass: 0.0747499912977
+	total_seconds_last_epoch: 173.188034058
+	train_objective: 0.0499291606247
+	train_term_0: 0.0473412312567
+	train_term_1_weight_decay: 0.00258794729598
+	train_y_misclass: 0.0104666743428
+	training_seconds_this_epoch: 86.6998062134
+	valid_objective: 0.205777809024
+	valid_term_0: 0.203189834952
+	valid_term_1_weight_decay: 0.00258794706315
+	valid_y_misclass: 0.074249997735
+Time this epoch: 0:01:26.463374
+Monitoring step:
+	Epochs seen: 20
+	Batches seen: 3000
+	Examples seen: 300000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.220067024231
+	test_term_0: 0.21747790277
+	test_term_1_weight_decay: 0.00258916337043
+	test_y_misclass: 0.0742500051856
+	total_seconds_last_epoch: 173.844390869
+	train_objective: 0.0490884892642
+	train_term_0: 0.0464993044734
+	train_term_1_weight_decay: 0.00258916686289
+	train_y_misclass: 0.0102666737512
+	training_seconds_this_epoch: 86.4633483887
+	valid_objective: 0.207863941789
+	valid_term_0: 0.205274820328
+	valid_term_1_weight_decay: 0.00258916337043
+	valid_y_misclass: 0.074249997735
+Time this epoch: 0:01:26.627235
+Monitoring step:
+	Epochs seen: 21
+	Batches seen: 3150
+	Examples seen: 315000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.221749961376
+	test_term_0: 0.219159632921
+	test_term_1_weight_decay: 0.00259033986367
+	test_y_misclass: 0.074500001967
+	total_seconds_last_epoch: 173.498092651
+	train_objective: 0.0481769703329
+	train_term_0: 0.0455866195261
+	train_term_1_weight_decay: 0.00259033543989
+	train_y_misclass: 0.0102666737512
+	training_seconds_this_epoch: 86.627204895
+	valid_objective: 0.209644660354
+	valid_term_0: 0.207054302096
+	valid_term_1_weight_decay: 0.00259033986367
+	valid_y_misclass: 0.074500001967
+Time this epoch: 0:01:25.731298
+Monitoring step:
+	Epochs seen: 22
+	Batches seen: 3300
+	Examples seen: 330000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.222784847021
+	test_term_0: 0.220193371177
+	test_term_1_weight_decay: 0.00259147863835
+	test_y_misclass: 0.074500001967
+	total_seconds_last_epoch: 174.724716187
+	train_objective: 0.0469249114394
+	train_term_0: 0.0443334393203
+	train_term_1_weight_decay: 0.00259147561155
+	train_y_misclass: 0.0100000062957
+	training_seconds_this_epoch: 85.7312850952
+	valid_objective: 0.210643559694
+	valid_term_0: 0.208052143455
+	valid_term_1_weight_decay: 0.00259147863835
+	valid_y_misclass: 0.0750000029802
+Time this epoch: 0:01:24.834022
+Monitoring step:
+	Epochs seen: 23
+	Batches seen: 3450
+	Examples seen: 345000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223662406206
+	test_term_0: 0.221069842577
+	test_term_1_weight_decay: 0.00259258132428
+	test_y_misclass: 0.0740000009537
+	total_seconds_last_epoch: 173.904022217
+	train_objective: 0.0456491932273
+	train_term_0: 0.0430566184223
+	train_term_1_weight_decay: 0.0025925822556
+	train_y_misclass: 0.00953333918005
+	training_seconds_this_epoch: 84.8339920044
+	valid_objective: 0.211444854736
+	valid_term_0: 0.208852306008
+	valid_term_1_weight_decay: 0.00259258132428
+	valid_y_misclass: 0.0752500072122
+Time this epoch: 0:01:26.612907
+Monitoring step:
+	Epochs seen: 24
+	Batches seen: 3600
+	Examples seen: 360000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224258303642
+	test_term_0: 0.221664562821
+	test_term_1_weight_decay: 0.00259365234524
+	test_y_misclass: 0.073250003159
+	total_seconds_last_epoch: 172.783874512
+	train_objective: 0.0442847535014
+	train_term_0: 0.0416911095381
+	train_term_1_weight_decay: 0.00259365071543
+	train_y_misclass: 0.0093333395198
+	training_seconds_this_epoch: 86.6128845215
+	valid_objective: 0.211926728487
+	valid_term_0: 0.209333091974
+	valid_term_1_weight_decay: 0.00259365234524
+	valid_y_misclass: 0.0755000039935
+Time this epoch: 0:01:25.705288
+Monitoring step:
+	Epochs seen: 25
+	Batches seen: 3750
+	Examples seen: 375000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224659949541
+	test_term_0: 0.222065255046
+	test_term_1_weight_decay: 0.00259469239973
+	test_y_misclass: 0.0722499936819
+	total_seconds_last_epoch: 173.203781128
+	train_objective: 0.0428732931614
+	train_term_0: 0.0402786061168
+	train_term_1_weight_decay: 0.00259468890727
+	train_y_misclass: 0.00900000520051
+	training_seconds_this_epoch: 85.7052688599
+	valid_objective: 0.212155908346
+	valid_term_0: 0.209561243653
+	valid_term_1_weight_decay: 0.00259469239973
+	valid_y_misclass: 0.0747499987483
+Time this epoch: 0:01:25.473196
+Monitoring step:
+	Epochs seen: 26
+	Batches seen: 3900
+	Examples seen: 390000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224903315306
+	test_term_0: 0.22230759263
+	test_term_1_weight_decay: 0.0025957019534
+	test_y_misclass: 0.0717499926686
+	total_seconds_last_epoch: 173.786560059
+	train_objective: 0.0414495021105
+	train_term_0: 0.038853790611
+	train_term_1_weight_decay: 0.00259570102207
+	train_y_misclass: 0.00866667088121
+	training_seconds_this_epoch: 85.4732208252
+	valid_objective: 0.212220788002
+	valid_term_0: 0.209625080228
+	valid_term_1_weight_decay: 0.0025957019534
+	valid_y_misclass: 0.0747499987483
+Time this epoch: 0:01:26.898960
+Monitoring step:
+	Epochs seen: 27
+	Batches seen: 4050
+	Examples seen: 405000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224970817566
+	test_term_0: 0.222374081612
+	test_term_1_weight_decay: 0.00259668543003
+	test_y_misclass: 0.070999994874
+	total_seconds_last_epoch: 173.553649902
+	train_objective: 0.0399818196893
+	train_term_0: 0.0373851470649
+	train_term_1_weight_decay: 0.00259668170474
+	train_y_misclass: 0.00780000491068
+	training_seconds_this_epoch: 86.8989257812
+	valid_objective: 0.212067827582
+	valid_term_0: 0.209471166134
+	valid_term_1_weight_decay: 0.00259668543003
+	valid_y_misclass: 0.073500007391
+Time this epoch: 0:01:26.597212
+Monitoring step:
+	Epochs seen: 28
+	Batches seen: 4200
+	Examples seen: 420000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224931314588
+	test_term_0: 0.222333684564
+	test_term_1_weight_decay: 0.00259764213115
+	test_y_misclass: 0.0707499980927
+	total_seconds_last_epoch: 174.947113037
+	train_objective: 0.0385125689209
+	train_term_0: 0.0359149202704
+	train_term_1_weight_decay: 0.00259764422663
+	train_y_misclass: 0.00733333779499
+	training_seconds_this_epoch: 86.5972595215
+	valid_objective: 0.211770147085
+	valid_term_0: 0.209172517061
+	valid_term_1_weight_decay: 0.00259764213115
+	valid_y_misclass: 0.0727500021458
+Time this epoch: 0:01:26.582882
+Monitoring step:
+	Epochs seen: 29
+	Batches seen: 4350
+	Examples seen: 435000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224796891212
+	test_term_0: 0.22219838202
+	test_term_1_weight_decay: 0.00259857531637
+	test_y_misclass: 0.0704999938607
+	total_seconds_last_epoch: 174.585357666
+	train_objective: 0.0370517671108
+	train_term_0: 0.0344531796873
+	train_term_1_weight_decay: 0.00259857461788
+	train_y_misclass: 0.00626666937023
+	training_seconds_this_epoch: 86.5829162598
+	valid_objective: 0.211347401142
+	valid_term_0: 0.208748832345
+	valid_term_1_weight_decay: 0.00259857531637
+	valid_y_misclass: 0.0717500001192
+Time this epoch: 0:01:26.719488
+Monitoring step:
+	Epochs seen: 30
+	Batches seen: 4500
+	Examples seen: 450000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224651962519
+	test_term_0: 0.222052484751
+	test_term_1_weight_decay: 0.00259948242456
+	test_y_misclass: 0.0704999938607
+	total_seconds_last_epoch: 174.675125122
+	train_objective: 0.0356481783092
+	train_term_0: 0.0330487154424
+	train_term_1_weight_decay: 0.00259948265739
+	train_y_misclass: 0.00586666865274
+	training_seconds_this_epoch: 86.7194671631
+	valid_objective: 0.210901483893
+	valid_term_0: 0.208302035928
+	valid_term_1_weight_decay: 0.00259948242456
+	valid_y_misclass: 0.0717499926686
+Time this epoch: 0:01:26.470286
+Monitoring step:
+	Epochs seen: 31
+	Batches seen: 4650
+	Examples seen: 465000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224538445473
+	test_term_0: 0.221938058734
+	test_term_1_weight_decay: 0.00260036764666
+	test_y_misclass: 0.0702499896288
+	total_seconds_last_epoch: 174.885437012
+	train_objective: 0.0343212522566
+	train_term_0: 0.0317208841443
+	train_term_1_weight_decay: 0.00260036997497
+	train_y_misclass: 0.00553333479911
+	training_seconds_this_epoch: 86.4703063965
+	valid_objective: 0.210498824716
+	valid_term_0: 0.207898467779
+	valid_term_1_weight_decay: 0.00260036764666
+	valid_y_misclass: 0.0709999874234
+Time this epoch: 0:01:26.574891
+Monitoring step:
+	Epochs seen: 32
+	Batches seen: 4800
+	Examples seen: 480000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224415570498
+	test_term_0: 0.221814379096
+	test_term_1_weight_decay: 0.00260123074986
+	test_y_misclass: 0.0697499960661
+	total_seconds_last_epoch: 174.45539856
+	train_objective: 0.0330489687622
+	train_term_0: 0.0304477512836
+	train_term_1_weight_decay: 0.00260122935288
+	train_y_misclass: 0.00513333408162
+	training_seconds_this_epoch: 86.5749053955
+	valid_objective: 0.2100867033
+	valid_term_0: 0.207485437393
+	valid_term_1_weight_decay: 0.00260123074986
+	valid_y_misclass: 0.070999994874
+Time this epoch: 0:01:26.654124
+Monitoring step:
+	Epochs seen: 33
+	Batches seen: 4950
+	Examples seen: 495000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224325850606
+	test_term_0: 0.221723765135
+	test_term_1_weight_decay: 0.00260207429528
+	test_y_misclass: 0.0694999992847
+	total_seconds_last_epoch: 174.717346191
+	train_objective: 0.0318450704217
+	train_term_0: 0.0292429905385
+	train_term_1_weight_decay: 0.00260207010433
+	train_y_misclass: 0.00486666755751
+	training_seconds_this_epoch: 86.654083252
+	valid_objective: 0.209702029824
+	valid_term_0: 0.207099989057
+	valid_term_1_weight_decay: 0.00260207429528
+	valid_y_misclass: 0.0702499970794
+Time this epoch: 0:01:26.639390
+Monitoring step:
+	Epochs seen: 34
+	Batches seen: 5100
+	Examples seen: 510000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224206596613
+	test_term_0: 0.22160372138
+	test_term_1_weight_decay: 0.00260289665312
+	test_y_misclass: 0.0687499940395
+	total_seconds_last_epoch: 174.715560913
+	train_objective: 0.0306776817888
+	train_term_0: 0.0280747823417
+	train_term_1_weight_decay: 0.00260289548896
+	train_y_misclass: 0.00466666696593
+	training_seconds_this_epoch: 86.6393966675
+	valid_objective: 0.209262564778
+	valid_term_0: 0.206659659743
+	valid_term_1_weight_decay: 0.00260289665312
+	valid_y_misclass: 0.070000000298
+Time this epoch: 0:01:26.557145
+Monitoring step:
+	Epochs seen: 35
+	Batches seen: 5250
+	Examples seen: 525000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.224090248346
+	test_term_0: 0.221486523747
+	test_term_1_weight_decay: 0.00260369945318
+	test_y_misclass: 0.0689999982715
+	total_seconds_last_epoch: 174.541641235
+	train_objective: 0.0295638367534
+	train_term_0: 0.0269601363689
+	train_term_1_weight_decay: 0.00260369875468
+	train_y_misclass: 0.0043999995105
+	training_seconds_this_epoch: 86.5571136475
+	valid_objective: 0.208821251988
+	valid_term_0: 0.20621752739
+	valid_term_1_weight_decay: 0.00260369945318
+	valid_y_misclass: 0.0694999992847
+Time this epoch: 0:01:26.708171
+Monitoring step:
+	Epochs seen: 36
+	Batches seen: 5400
+	Examples seen: 540000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223966613412
+	test_term_0: 0.221362069249
+	test_term_1_weight_decay: 0.00260448688641
+	test_y_misclass: 0.0679999962449
+	total_seconds_last_epoch: 174.738708496
+	train_objective: 0.0284916516393
+	train_term_0: 0.0258871689439
+	train_term_1_weight_decay: 0.00260448898189
+	train_y_misclass: 0.00413333252072
+	training_seconds_this_epoch: 86.708152771
+	valid_objective: 0.208361417055
+	valid_term_0: 0.205756992102
+	valid_term_1_weight_decay: 0.00260448688641
+	valid_y_misclass: 0.0679999962449
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.591362 seconds
+Time this epoch: 0:01:26.924414
+Monitoring step:
+	Epochs seen: 37
+	Batches seen: 5550
+	Examples seen: 555000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223840355873
+	test_term_0: 0.221235126257
+	test_term_1_weight_decay: 0.00260525452904
+	test_y_misclass: 0.0679999962449
+	total_seconds_last_epoch: 176.197906494
+	train_objective: 0.0274607762694
+	train_term_0: 0.0248555149883
+	train_term_1_weight_decay: 0.00260525778867
+	train_y_misclass: 0.00373333226889
+	training_seconds_this_epoch: 86.9244308472
+	valid_objective: 0.207888901234
+	valid_term_0: 0.205283626914
+	valid_term_1_weight_decay: 0.00260525452904
+	valid_y_misclass: 0.066749997437
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.408557 seconds
+Time this epoch: 0:01:26.538830
+Monitoring step:
+	Epochs seen: 38
+	Batches seen: 5700
+	Examples seen: 570000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223707050085
+	test_term_0: 0.22110106051
+	test_term_1_weight_decay: 0.00260600796901
+	test_y_misclass: 0.0674999952316
+	total_seconds_last_epoch: 176.440826416
+	train_objective: 0.0264639034867
+	train_term_0: 0.0238578971475
+	train_term_1_weight_decay: 0.00260600447655
+	train_y_misclass: 0.00339999888092
+	training_seconds_this_epoch: 86.5388031006
+	valid_objective: 0.207396194339
+	valid_term_0: 0.204790174961
+	valid_term_1_weight_decay: 0.00260600796901
+	valid_y_misclass: 0.066749997437
+Time this epoch: 0:01:26.568033
+Monitoring step:
+	Epochs seen: 39
+	Batches seen: 5850
+	Examples seen: 585000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223571330309
+	test_term_0: 0.220964550972
+	test_term_1_weight_decay: 0.0026067441795
+	test_y_misclass: 0.0679999962449
+	total_seconds_last_epoch: 174.618362427
+	train_objective: 0.0255079176277
+	train_term_0: 0.0229011774063
+	train_term_1_weight_decay: 0.00260674022138
+	train_y_misclass: 0.00313333235681
+	training_seconds_this_epoch: 86.5680007935
+	valid_objective: 0.206883341074
+	valid_term_0: 0.204276621342
+	valid_term_1_weight_decay: 0.0026067441795
+	valid_y_misclass: 0.0662499964237
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 2.017575 seconds
+Time this epoch: 0:01:26.778388
+Monitoring step:
+	Epochs seen: 40
+	Batches seen: 6000
+	Examples seen: 600000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223398044705
+	test_term_0: 0.22079063952
+	test_term_1_weight_decay: 0.00260746711865
+	test_y_misclass: 0.0674999952316
+	total_seconds_last_epoch: 176.666885376
+	train_objective: 0.0245767347515
+	train_term_0: 0.0219692774117
+	train_term_1_weight_decay: 0.00260746944696
+	train_y_misclass: 0.00293333246373
+	training_seconds_this_epoch: 86.7783660889
+	valid_objective: 0.20632301271
+	valid_term_0: 0.203715503216
+	valid_term_1_weight_decay: 0.00260746711865
+	valid_y_misclass: 0.0654999911785
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 0.866744 seconds
+Time this epoch: 0:01:26.590691
+Monitoring step:
+	Epochs seen: 41
+	Batches seen: 6150
+	Examples seen: 615000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223250329494
+	test_term_0: 0.220642119646
+	test_term_1_weight_decay: 0.00260817212984
+	test_y_misclass: 0.0672499984503
+	total_seconds_last_epoch: 175.799118042
+	train_objective: 0.0236948151141
+	train_term_0: 0.0210866425186
+	train_term_1_weight_decay: 0.00260816980153
+	train_y_misclass: 0.00239999964833
+	training_seconds_this_epoch: 86.5906829834
+	valid_objective: 0.20578597486
+	valid_term_0: 0.203177794814
+	valid_term_1_weight_decay: 0.00260817212984
+	valid_y_misclass: 0.0652499943972
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 0.879660 seconds
+Time this epoch: 0:01:26.549256
+Monitoring step:
+	Epochs seen: 42
+	Batches seen: 6300
+	Examples seen: 630000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.223111689091
+	test_term_0: 0.220502793789
+	test_term_1_weight_decay: 0.00260886666365
+	test_y_misclass: 0.0669999942183
+	total_seconds_last_epoch: 175.374923706
+	train_objective: 0.0228519961238
+	train_term_0: 0.0202431380749
+	train_term_1_weight_decay: 0.00260886712931
+	train_y_misclass: 0.00193333323114
+	training_seconds_this_epoch: 86.5492706299
+	valid_objective: 0.205246239901
+	valid_term_0: 0.2026373595
+	valid_term_1_weight_decay: 0.00260886666365
+	valid_y_misclass: 0.0644999966025
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.542261 seconds
+Time this epoch: 0:01:26.610019
+Monitoring step:
+	Epochs seen: 43
+	Batches seen: 6450
+	Examples seen: 645000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.222969487309
+	test_term_0: 0.220359966159
+	test_term_1_weight_decay: 0.0026095462963
+	test_y_misclass: 0.0664999932051
+	total_seconds_last_epoch: 176.206268311
+	train_objective: 0.0220389608294
+	train_term_0: 0.0194294285029
+	train_term_1_weight_decay: 0.0026095432695
+	train_y_misclass: 0.00153333321214
+	training_seconds_this_epoch: 86.6100234985
+	valid_objective: 0.204681992531
+	valid_term_0: 0.20207247138
+	valid_term_1_weight_decay: 0.0026095462963
+	valid_y_misclass: 0.0642499998212
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.435834 seconds
+Time this epoch: 0:01:26.751114
+Monitoring step:
+	Epochs seen: 44
+	Batches seen: 6600
+	Examples seen: 660000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.222829520702
+	test_term_0: 0.220219284296
+	test_term_1_weight_decay: 0.00261021102779
+	test_y_misclass: 0.0662499964237
+	total_seconds_last_epoch: 176.179412842
+	train_objective: 0.0212601106614
+	train_term_0: 0.0186498910189
+	train_term_1_weight_decay: 0.00261020753533
+	train_y_misclass: 0.00146666658111
+	training_seconds_this_epoch: 86.7511062622
+	valid_objective: 0.204108715057
+	valid_term_0: 0.201498493552
+	valid_term_1_weight_decay: 0.00261021102779
+	valid_y_misclass: 0.0642499998212
+Time this epoch: 0:01:26.574888
+Monitoring step:
+	Epochs seen: 45
+	Batches seen: 6750
+	Examples seen: 675000
+	learning_rate: 3.10000104946e-05
+	momentum: 0.499999791384
+	test_objective: 0.222684621811
+	test_term_0: 0.220073714852
+	test_term_1_weight_decay: 0.00261086365208
+	test_y_misclass: 0.0664999932051
+	total_seconds_last_epoch: 174.679580688
+	train_objective: 0.0205115284771
+	train_term_0: 0.0179006736726
+	train_term_1_weight_decay: 0.00261086085811
+	train_y_misclass: 0.00139999995008
+	training_seconds_this_epoch: 86.5749053955
+	valid_objective: 0.203527614474
+	valid_term_0: 0.20091676712
+	valid_term_1_weight_decay: 0.00261086365208
+	valid_y_misclass: 0.0627499818802
+Saving to best_model_15.pkl...
+Saving to best_model_15.pkl done. Time elapsed: 1.183111 seconds

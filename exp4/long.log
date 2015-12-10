@@ -1,0 +1,59 @@
+Using gpu device 1: GeForce GTX TITAN X
+Gtk-Message: Failed to load module "canberra-gtk-module"
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/model_extensions/norm_constraint.py:97: UserWarning: MaxL2FilterNorm is deprecated and may be removed on or after 2016-01-31. Use ConstrainFilterL2Norm.
+  warnings.warn("MaxL2FilterNorm is deprecated and may be removed on or"
+Input shape: (96, 96)
+Detector space: (92, 92)
+Output space: (46, 46)
+Input shape: (46, 46)
+Detector space: (42, 42)
+Output space: (21, 21)
+Input shape: (21, 21)
+Detector space: (17, 17)
+Output space: (9, 9)
+Loading data took 135.975 ms
+Loading data took 136.579 ms
+Parameter and initial learning rate summary:
+	h2_W: 2.59199999346e-05
+	h2_b: 3.19999999192e-05
+	h3_W: 2.04799999483e-05
+	h3_b: 3.19999999192e-05
+	h4_W: 1.56799999604e-05
+	h4_b: 3.19999999192e-05
+	softmax_b: 3.19999999192e-05
+	softmax_W: 0.00115199999709
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 2.901040 seconds
+Model | Epoch 1: 10 batches seen
+Model | Epoch 1: 20 batches seen
+Model | Epoch 1: 30 batches seen
+Model | Epoch 1: 40 batches seen
+Model | Epoch 1: 50 batches seen
+Model | Epoch 1: 60 batches seen
+Model | Epoch 1: 70 batches seen
+Model | Epoch 1: 80 batches seen
+Model | Epoch 1: 90 batches seen
+compiling begin_record_entry...
+compiling begin_record_entry done. Time elapsed: 0.034902 seconds
+Monitored channels: 
+	learning_rate
+	momentum
+	total_seconds_last_epoch
+	training_seconds_this_epoch
+	valid_objective
+	valid_y_misclass
+Compiling accum...
+graph size: 173
+Compiling accum done. Time elapsed: 6.630525 seconds
+Monitoring step:
+	Epochs seen: 0
+	Batches seen: 100
+	Examples seen: 10000
+	learning_rate: 3.20000071952e-05
+	momentum: 0.699999988079
+	total_seconds_last_epoch: 0.0
+	training_seconds_this_epoch: 0.0
+	valid_objective: 0.497085720301
+	valid_y_misclass: 0.221000000834
+Model | Epoch 1: 110 batches seen
+Model | Epoch 1: 120 batches seen

@@ -1,6 +1,6 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_slp.2",
+    "experiment-name" : "food_classification_slp.1",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {

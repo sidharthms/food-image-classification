@@ -1,6 +1,5 @@
 import os, sys, tarfile, urllib
 import numpy as np
-import matplotlib.pyplot as plt
 
 # image shape
 HEIGHT = 96
@@ -85,6 +84,7 @@ def plot_image(image):
     :param image: the image to be plotted in a 3-D matrix format
     :return: None
     """
+    import matplotlib.pyplot as plt
     plt.imshow(image)
     plt.show()
 

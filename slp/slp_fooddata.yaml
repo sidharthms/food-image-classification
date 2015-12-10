@@ -23,6 +23,10 @@
     algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
         batch_size: %(batch_size)i,
         learning_rate: %(init_learning_rate)f,
+        learning_rule: !obj:pylearn2.training_algorithms.learning_rule.Momentum {
+            init_momentum: 0.5,
+            nesterov_momentum: True
+        },
         seed: %(sgd_seed)s,
         train_iteration_mode: even_sequential,
         monitoring_dataset:
@@ -34,16 +38,16 @@
                               path: '../',
                           }
             },
-        update_callbacks: [
-            !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
-                model: *model,
-                tick_rate: 10,
-                # monitor_rate: 100
-            },
-            # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
-            #     model: *model
-            # }
-        ],
+        # update_callbacks: [
+        #     !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
+        #         model: *model,
+        #         tick_rate: 10,
+        #         # monitor_rate: 100
+        #     },
+        #     # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
+        #     #     model: *model
+        #     # }
+        # ],
         pre_update_callbacks: [
             !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
                 model: *model

@@ -3,8 +3,10 @@ import os
 import numpy
 import random
 import pdb
+import argparse
 from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
+from pylearn2.train_extensions.best_params import MonitorBasedSaveBest
 import sys
 
 __author__ = 'luke'
@@ -21,9 +23,9 @@ additional_args = {
 }
 
 default_args = {
-    'max_norm_y': numpy.array([2]),
-    'l_ir_y': numpy.array([-2.16]),
-    'log_init_learning_rate': numpy.array([-4])
+    'max_norm_y': numpy.array([0.5]),
+    'l_ir_y': numpy.array([-0.5]),
+    'log_init_learning_rate': numpy.array([-5.7])
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -66,10 +68,15 @@ def main(job_id, params, cache):
     with open('slp_fooddata.yaml', 'r') as f:
         trainer = f.read()
 
-    print trainer
+    # print trainer
 
     yaml_string = trainer % train_params
     train_obj = yaml_parse.load(yaml_string)
+
+    if 'converge' in params:
+        del train_obj.algorithm.termination_criterion._criteria[:]
+        train_obj.extensions.append(MonitorBasedSaveBest('valid_y_misclass', 'best_model.pkl'))
+
     train_obj.setup()
     train_obj.model.monitor.on_channel_conflict = 'ignore'
 
@@ -79,4 +86,14 @@ def main(job_id, params, cache):
     return float(original_misclass)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--converge', action='store_true', help='keep running until convergence')
+    parser.add_argument('--gpu', type=int, help='request to use specific gpu')
+    args = parser.parse_args()
+
+    if args.gpu >= 0:
+        import theano.sandbox.cuda
+        theano.sandbox.cuda.use('gpu' + str(args.gpu))
+
+    default_args.update(vars(args))
     main(0, default_args, {})

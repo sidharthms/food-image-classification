@@ -7,3 +7,4 @@ stl10_binary
 *.pyc
 *.bin
 .idea
+*.npy

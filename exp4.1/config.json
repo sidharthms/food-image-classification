@@ -1,6 +1,6 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_exp4",
+    "experiment-name" : "food_classification_exp4.1",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {

@@ -1,0 +1,28 @@
+Using gpu device 1: GeForce GTX TITAN X
+Gtk-Message: Failed to load module "canberra-gtk-module"
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/model_extensions/norm_constraint.py:97: UserWarning: MaxL2FilterNorm is deprecated and may be removed on or after 2016-01-31. Use ConstrainFilterL2Norm.
+  warnings.warn("MaxL2FilterNorm is deprecated and may be removed on or"
+Input shape: (96, 96)
+Detector space: (92, 92)
+Output space: (46, 46)
+Input shape: (46, 46)
+Detector space: (42, 42)
+Output space: (21, 21)
+Input shape: (21, 21)
+Detector space: (17, 17)
+Output space: (9, 9)
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/costs/mlp/__init__.py:108: UserWarning: Coefficients should be given as a dictionary with layer names as key. The support of coefficients as list would be deprecated from 03/06/2015
+  warnings.warn("Coefficients should be given as a dictionary "
+Loading data took 136.262 ms
+Loading data took 136.388 ms
+Parameter and initial learning rate summary:
+	h2_W: 9.99999997475e-07
+	h2_b: 9.99999997475e-07
+	h3_W: 9.99999997475e-07
+	h3_b: 9.99999997475e-07
+	h4_W: 9.99999997475e-07
+	h4_b: 9.99999997475e-07
+	softmax_b: 9.99999997475e-07
+	softmax_W: 9.99999997475e-07
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 2.734520 seconds

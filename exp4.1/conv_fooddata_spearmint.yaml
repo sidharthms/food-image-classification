@@ -21,6 +21,7 @@
                      pool_shape: [2, 2],
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
+                     W_lr_scale: %(w_lr_sc_h2)f,
                      max_kernel_norm: %(max_kernel_norm_h2)f,
                      tied_b: True,
                  }, !obj:pylearn2.models.mlp.ConvRectifiedLinear {
@@ -31,6 +32,7 @@
                      pool_shape: [2, 2],
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
+                     W_lr_scale: %(w_lr_sc_h3)f,
                      max_kernel_norm: %(max_kernel_norm_h3)f,
                      tied_b: True,
                  }, !obj:pylearn2.models.mlp.ConvRectifiedLinear {
@@ -41,10 +43,12 @@
                      pool_shape: [2, 2],
                      pool_stride: [2, 2],
                      left_slope: %(rectifier_left_slope)f,
+                     W_lr_scale: %(w_lr_sc_h4)f,
                      max_kernel_norm: %(max_kernel_norm_h4)f,
                      tied_b: True,
                  }, !obj:pylearn2.models.mlp.Softmax {
                      max_col_norm: %(max_col_norm_y)f,
+                     W_lr_scale: %(w_lr_sc_y)f,
                      layer_name: 'y',
                      n_classes: 2,
                      irange:  %(irange_y)f
@@ -62,17 +66,16 @@
         train_iteration_mode: even_sequential,
         monitoring_dataset:
             {
-                'train' : *train,
+                'train' : &train,
                 'valid' : !obj:fooddata.FoodData {
                               which_set: 'train',
                               start: %(valid_start)i,
                               stop:  %(valid_stop)i,
                               path: '../',
                           },
-                'test'  : !obj:fooddata.FoodData {
+                'test'  : !obj:pylearn2.datasets.mnist.MNIST {
                               which_set: 'test',
-                              stop: %(test_stop)i,
-                              path: '../',
+                              stop: %(test_stop)i
                           }
                 # 'test'  : !obj:pylearn2.datasets.mnist.MNIST {
                 #               which_set: 'test',
@@ -82,25 +85,25 @@
         # update_callbacks: [
         #     !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
         #         model: *model,
-        #         tick_rate: 10,
-        #         monitor_rate: 100
-        #     # },
+        #         tick_rate: 50
+        #     },
         #     # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
         #     #     model: *model
         #     # }
         # ],
-         pre_update_callbacks: [
-             !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
-                 model: *model
-             }
-         ],
-        cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
-            !obj:pylearn2.costs.cost.MethodCost {
-                method: 'cost_from_X'
-            }, !obj:pylearn2.costs.mlp.WeightDecay {
-                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_h4)f, %(weight_decay_y)f ]
+        pre_update_callbacks: [
+            !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
+                model: *model
             }
-            ]
+        ],
+        cost: !obj:pylearn2.costs.mlp.dropout.Dropout {
+            input_include_probs: {
+                'h2': %(dropout_h2)f, 'h3': %(dropout_h3)f, 'h4': %(dropout_h4)f, 'y': %(dropout_y)f
+            },
+            input_scales: {
+                'h2': %(dscale_h2)f, 'h3': %(dscale_h3)f, 'h4': %(dscale_h4)f, 'y': %(dscale_y)f
+            },
+            per_example: False
         },
         termination_criterion: !obj:pylearn2.termination_criteria.And {
             criteria: [
@@ -110,6 +113,11 @@
                 # !obj:pylearn2.termination_criteria.BatchCounter {
                 #     max_batches: %(max_batches)i
                 # },
+                !obj:pylearn2.termination_criteria.MonitorBased {
+                    channel_name: "valid_y_misclass",
+                    prop_decrease: 0.10,
+                    N: 30
+                },
             ]
         },
     }

@@ -98,8 +98,8 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
             y_path = path + 'train_labels.bin'
         else:
             assert which_set == 'test'
-            im_path = path + 'train_images.bin'
-            y_path = path + 'train_labels.bin'
+            im_path = path + 'test_images.bin'
+            y_path = path + 'test_labels.bin'
 
         time1 = time.time()
         X = np.fromfile(im_path, dtype=np.uint8).reshape((-1, 96, 96, 3))

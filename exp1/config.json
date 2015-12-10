@@ -1,6 +1,6 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_exp1",
+    "experiment-name" : "food_classification_exp1.2",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {
@@ -18,6 +18,11 @@
         }
     },
     "variables": {
+        "kernel_config": {
+            "type" : "ENUM",
+            "size" : 1,
+            "options" : ["a", "b"]
+        },
         "max_norm_h2" : {
             "type" : "FLOAT",
             "size" : 1,
