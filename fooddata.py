@@ -107,7 +107,6 @@ class FoodData(dense_design_matrix.DenseDesignMatrix):
 
         time2 = time.time()
         print 'Loading data took %0.3f ms' % ((time2-time1)*1000.0)
-        pdb.set_trace()
 
         y_labels = 2
 

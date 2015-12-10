@@ -7,8 +7,6 @@ from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
 import sys
 
-sys.path.append(os.path.dirname(os.getcwd()))
-
 __author__ = 'sidharth'
 
 seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
@@ -63,7 +61,13 @@ def update_softmax_layer(layer, log_range, norm, model_params, rng):
 
 
 def main(job_id, params, cache):
+    # Fix sub directory problems
+    sys.path.append(os.path.dirname(os.getcwd()))
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+    # Add parameters that are not currently being tuned but could potentially be tuned.
     params.update(additional_args)
+
     fixed_params = (params['kernel_size_h2'][0], params['kernel_size_h3'][0])
     if 'cached_trainer' + str(fixed_params) not in cache:
         train_params = {
@@ -87,6 +91,7 @@ def main(job_id, params, cache):
             'max_kernel_norm_h3': params['max_norm_h3'][0],
 
             'weight_decay_h2': math.pow(10, params['l_wdecay_h2'][0]),
+            'weight_decay_h3': math.pow(10, params['l_wdecay_h3'][0]),
             'weight_decay_y': math.pow(10, params['l_wdecay_y'][0]),
             'max_col_norm_y': params['max_norm_y'][0],
             'irange_y': math.pow(10, params['l_ir_y'][0]),

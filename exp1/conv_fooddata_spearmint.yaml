@@ -60,26 +60,26 @@
                 #               stop: %(test_stop)i
                 #           }
             },
-        update_callbacks: [
-            # !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
-            #     model: *model,
-            #     tick_rate: 1,
-            #     monitor_rate: 100
-            # },
-            # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
-            #     model: *model
-            # }
-        ],
-        pre_update_callbacks: [
-            !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
-                model: *model
-            }
-        ],
+        # update_callbacks: [
+        #     !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
+        #         model: *model,
+        #         tick_rate: 10,
+        #         monitor_rate: 100
+        #     # },
+        #     # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {
+        #     #     model: *model
+        #     # }
+        # ],
+         pre_update_callbacks: [
+             !obj:pylearn2.training_algorithms.sgd.BatchStartNotifier {
+                 model: *model
+             }
+         ],
         cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
             !obj:pylearn2.costs.cost.MethodCost {
                 method: 'cost_from_X'
             }, !obj:pylearn2.costs.mlp.WeightDecay {
-                coeffs: [ %(weight_decay_h2)f, %(weight_decay_y)f ]
+                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_y)f ]
             }
             ]
         },
