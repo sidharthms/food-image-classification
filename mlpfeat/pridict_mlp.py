@@ -1,12 +1,16 @@
 import sys  
 import os  
+import pdb
 from pylearn2.utils import serial  
 from pylearn2.config import yaml_parse  
+import numpy as np
 
 try:  
-    model_path = sys.argv[1]  
-    test_path = sys.argv[2]  
-    out_path = sys.argv[3]  
+    model_path = "model.pkl"
+    test_X_path = "../testSIFT_vectors.npy"
+    test_pick_path = "../testSIFT_picids.npy"
+    test_y_path = "../test_labels.npy"
+
 except IndexError:  
     print "Usage: predict.py <model file> <test file> <output file>"  
     quit()  
@@ -17,8 +21,9 @@ except Exception, e:
     print model_path + "doesn't seem to be a valid model path, I got this error when trying to load it: "  
     print e  
 
-# dataset = ....
-
+datasetX = np.load(test_X_path).reshape((-1,128))
+dataPic = np.load(test_pick_path).reshape((-1,1))
+datasetY = np.load(test_y_path).reshape((-1,1))
 
 batch_size = 100  
 model.set_batch_size(batch_size)  
@@ -38,16 +43,37 @@ f = function([X], Y)
 print("loading data and predicting...")
 
 y = []
-for i in xrange(dataset.X.shape[0] / batch_size):
-	x = dataset.X[i*batch_size:(i+1)*batch_size,:]
-	y.append(f(x))
+for i in xrange(datasetX.shape[0] / batch_size):
+    x = datasetX[i*batch_size:(i+1)*batch_size,:]
+    y.extend(f(x).tolist())
+    # pdb.set_trace()
 	
 print("writing predictions...")
-assert y.ndim == 1  
-assert y.shape[0] == dataset.X.shape[0] 
+assert dataPic.shape[0] == datasetX.shape[0] 
 
-out = open(out_path, 'w')  
-for i in xrange(y.shape[0]): 
-    out.write( '%f\n' % (y[i]))  
-out.close() 
+# pdb.set_trace()
 
+
+count = [0] * datasetY.shape[0]
+for i in xrange(len(y)):
+    if(y[i] == 0):
+        count[dataPic[i]] -= 4
+    else:
+        count[dataPic[i]] += 1
+
+# print(y)
+
+for i in xrange(len(count)):
+    if(count[i] >= 0):
+        count[i] = 1
+    if(count[i] < 0):
+        count[i] = 0
+
+correct = 0
+for i in xrange(len(count)):
+    if(count[i] == datasetY[i][0]):
+        correct += 1
+
+print(correct)
+print(len(count))
+print(float(correct)/len(count))

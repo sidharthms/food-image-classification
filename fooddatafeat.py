@@ -59,39 +59,6 @@ class FoodData(vector_spaces_dataset.VectorSpacesDataset):
             default = ('b', 'c')
             return bc.transpose(*[default.index(axis) for axis in axes])
 
-        # uectrain = load_zipped_pickle(path + 'UECTestInstance.gz')
-        # uectrain = np.array(uectrain).astype(dtype=np.uint8)
-        # uectrain.tofile(path + 'UECTestInstance.bin')
-
-        # print 'original length', len(uectrain)
-        # pdb.set_trace()
-        # save_zipped_pickle(path + 'UECTrainInstance1.gz', uectrain[:6000])
-        # save_zipped_pickle(path + 'UECTrainInstance2.gz', uectrain[6000:12000])
-
-        # uectrain = load_zipped_pickle(path + 'UECTrainInstance.gz')
-        # print 'original length', len(uectrain)
-        # pdb.set_trace()
-        # save_zipped_pickle(path + 'UECTrainInstance1.gz', uectrain[:6000])
-        # save_zipped_pickle(path + 'UECTrainInstance2.gz', uectrain[6000:12000])
-
-        # uectest = load_zipped_pickle(path + 'UECTestInstance.gz')
-        # print 'original length', len(uectest)
-        # pdb.set_trace()
-        # save_zipped_pickle(path + 'UECTestInstance1.gz', uectest[:1000])
-        # save_zipped_pickle(path + 'UECTestInstance2.gz', uectest[1000:2000])
-
-        # mit = load_zipped_pickle(path + 'MITTrainInstance.gz')
-        # mit = np.array(mit).astype(dtype=np.uint8)
-        # mit.tofile(path + 'MITTrainInstance.bin')
-
-        # mit = load_zipped_pickle(path + 'MITTestInstance.gz')
-        # mit = np.array(mit).astype(dtype=np.uint8)
-        # mit.tofile(path + 'MITTestInstance.bin')
-
-        # mittest = load_zipped_pickle(path + 'MITTrainInstance.gz')
-        # print 'original length', len(mittest)
-        # pdb.set_trace()
-        # save_zipped_pickle(path + 'MITTrainInstance.gz', mittest[:1166])
 
         if which_set == 'train':
             im_path = path + 'trainSIFT_vectors.npy'
@@ -119,13 +86,8 @@ class FoodData(vector_spaces_dataset.VectorSpacesDataset):
             IndexSpace(dim = 1, max_labels = 2)
         ])
 
-        super(FoodData, self).__init__(
-            data=(X, Y),
-            data_specs=(space, source)
-        )
-
-        self.X = self.data[0]
-        self.y = self.data[1]
+        self.X = X
+        self.y = Y
 
         assert not N.any(N.isnan(self.X))
 
@@ -144,6 +106,11 @@ class FoodData(vector_spaces_dataset.VectorSpacesDataset):
             else:
                 self.y = self.y[start:stop]
             assert self.y.shape[0] == stop - start
+
+        super(FoodData, self).__init__(
+            data=(self.X, self.y),
+            data_specs=(space, source)
+        )
 
 
     def adjust_to_be_viewed_with(self, X, other, per_example=False):

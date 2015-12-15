@@ -38,19 +38,19 @@
         },
         seed: %(sgd_seed)s,
         train_iteration_mode: even_sequential,
-        # monitoring_dataset:
-        #     {
-        #         'valid' : !obj:fooddata.FoodData {
-        #                       which_set: 'train',
-        #                       start: %(train_stop)i,
-        #                       stop:  %(valid_stop)i,
-        #                       path: '../',
-        #                   }
-        #     },
+        monitoring_dataset:
+            {
+                'valid' : !obj:fooddatafeat.FoodData {
+                              which_set: 'train',
+                              start: %(train_stop)i,
+                              stop:  %(valid_stop)i,
+                              path: '../',
+                }
+            },
         update_callbacks: [
             !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
                 model: *model,
-                tick_rate: 10,
+                # tick_rate: 10,
                 # monitor_rate: 100
             },
             # !obj:pylearn2.training_algorithms.sgd.BatchCompleteNotifier {

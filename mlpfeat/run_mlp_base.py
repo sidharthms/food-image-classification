@@ -5,6 +5,7 @@ import random
 import pdb
 from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
+from pylearn2.utils import serial
 import sys
 
 __author__ = 'luke'
@@ -29,7 +30,7 @@ default_args = {
     'l_ir_h1': numpy.array([-1.1128]),
     'l_ir_h2': numpy.array([-1.3046]),
     'l_ir_y': numpy.array([-2.16]),
-    'log_init_learning_rate': numpy.array([-4])
+    'log_init_learning_rate': numpy.array([-2])
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -54,11 +55,11 @@ def main(job_id, params, cache):
     params.update(additional_args)
 
     train_params = {
-        'train_stop': 20000,
-        'valid_stop': 24000,
+        'train_stop': 60000,
+        'valid_stop': 86000,
         'test_stop': 4000,
         'batch_size': 100,
-        'max_epochs': 5,
+        'max_epochs': 10,
         'max_batches': 10,
         'sgd_seed': seed_str,
         'save_file': 'result',
@@ -91,7 +92,8 @@ def main(job_id, params, cache):
     train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
     original_misclass = read_channel(train_obj.model, misclass_channel)
-    return float(original_misclass)
+    serial.save("model.pkl", train_obj.model, on_overwrite='backup')
+    return 0
 
 if __name__ == "__main__":
     main(0, default_args, {})
