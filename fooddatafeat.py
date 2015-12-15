@@ -13,7 +13,8 @@ import cPickle
 np = N
 from theano.compat.six.moves import xrange
 from pylearn2.datasets import vector_spaces_dataset
-from pylearn2.space import VectorSpace, CompositeSpace
+from pylearn2.sandbox.rnn.space import SequenceDataSpace
+from pylearn2.space import VectorSpace, CompositeSpace, IndexSpace
 from pylearn2.utils.rng import make_np_rng
 
 class FoodData(vector_spaces_dataset.VectorSpacesDataset):
@@ -115,7 +116,7 @@ class FoodData(vector_spaces_dataset.VectorSpacesDataset):
         source = ('features', 'targets')
         space = CompositeSpace([
             VectorSpace(128),
-            VectorSpace(1)
+            IndexSpace(dim = 1, max_labels = 2)
         ])
 
         super(FoodData, self).__init__(
