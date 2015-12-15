@@ -1,0 +1,76 @@
+{
+    "language"        : "PYTHON",
+    "experiment-name" : "food_classification_mlp.1",
+    "polling-time"    : 1,
+    "resources" : {
+        "my-machine" : {
+            "scheduler"         : "managed",
+            "max-concurrent"    : 2,
+            "gpus"              : 2
+        }
+    },
+    "tasks": {
+        "cifar10" : {
+            "type"       : "OBJECTIVE",
+            "likelihood" : "GAUSSIAN",
+            "main-file"  : "run_mlp_base",
+            "resources"  : ["my-machine"]
+        }
+    },
+    "variables": {
+        "dim_h1" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 50,
+            "max"  : 150
+        },
+        "dim_h2" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 5,
+            "max"  : 20
+        },
+        "max_norm_h1" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.3,
+            "max"  : 2.5
+        },
+        "l_ir_h1" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -3,
+            "max"  : 0.5
+        },
+        "max_norm_h2" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.5,
+            "max"  : 2.5
+        },
+        "l_ir_h2" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -3,
+            "max"  : 0.5
+        },
+        "max_norm_y" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.1,
+            "max"  : 6
+        },
+        "l_ir_y" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -6,
+            "max"  : -0.1
+        },
+        "log_init_learning_rate" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -7,
+            "max"  : -0.7
+        }
+    }
+}
