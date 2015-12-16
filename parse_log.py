@@ -11,7 +11,7 @@ parser.add_argument('--save', help='output file', default='accuracies.csv')
 parser.add_argument('files', nargs=argparse.REMAINDER, help='log files')
 args = parser.parse_args()
 
-p = re.compile('\t(.*?)_misclass: (\d*.\d*)')
+p = re.compile('\t(.*?)_misclass: (.*)')
 
 titles = ''
 lines = ['' for x in range(200)]
