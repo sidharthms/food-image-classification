@@ -7,6 +7,7 @@ import argparse
 from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
 from pylearn2.train_extensions.best_params import MonitorBasedSaveBest
+from pylearn2.utils import serial
 import sys
 
 __author__ = 'sidharth'

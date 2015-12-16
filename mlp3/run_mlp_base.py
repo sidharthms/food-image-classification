@@ -6,6 +6,7 @@ import pdb
 import argparse
 from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
+from pylearn2.utils import serial
 from pylearn2.train_extensions.best_params import MonitorBasedSaveBest
 import sys
 
@@ -21,18 +22,18 @@ additional_args = {
 }
 
 default_args = {
-    'dim_h1': ['5000'],
-    'dim_h2': ['500'],
-    'dim_h3': ['50'],
-    'max_norm_h1': numpy.array([2.0]),
-    'max_norm_h2': numpy.array([2.5]),
-    'max_norm_h3': numpy.array([3.0]),
-    'max_norm_y': numpy.array([1.0]),
-    'l_ir_h1': numpy.array([-1.1128]),
-    'l_ir_h2': numpy.array([-1.3046]),
-    'l_ir_h3': numpy.array([-1.5678]),
-    'l_ir_y': numpy.array([-2.16]),
-    'log_init_learning_rate': numpy.array([-4])
+    'dim_h1': ['15032'],
+    'dim_h2': ['3732'],
+    'dim_h3': ['2798'],
+    'max_norm_h1': numpy.array([0.819963]),
+    'max_norm_h2': numpy.array([7.435161]),
+    'max_norm_h3': numpy.array([4.087117]),
+    'max_norm_y': numpy.array([7.237254]),
+    'l_ir_h1': numpy.array([-2.365838]),
+    'l_ir_h2': numpy.array([0.593976]),
+    'l_ir_h3': numpy.array([-1.661538]),
+    'l_ir_y': numpy.array([1.860785]),
+    'log_init_learning_rate': numpy.array([-4.030811])
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -57,7 +58,7 @@ def main(job_id, requested_params, cache):
     params = additional_args
     params.update(requested_params)
 
-    if params['rate'] is not None:
+    if params.get('rate', None) is not None:
         params['log_init_learning_rate'][0] = numpy.array([params['rate']])
 
     train_params = {
@@ -112,6 +113,9 @@ def main(job_id, requested_params, cache):
     if 'converge' not in params:
         train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
+    if 'converge' in params:
+        print 'saving model'
+        serial.save(params['save'], train_obj.model, on_overwrite='backup')
     original_misclass = read_channel(train_obj.model, misclass_channel)
     return float(original_misclass) * 50
 

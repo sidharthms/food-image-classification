@@ -19,6 +19,8 @@ mlp_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(10
 k = 100
 
 additional_args = {
+    'start': 0,
+    'stop': 20000,
     'max_norm_h2': numpy.array([1.0]),
     'l_wdecay_h2': numpy.array([-6]),
     'l_wdecay_h3': numpy.array([-6]),
@@ -36,13 +38,16 @@ additional_args = {
 }
 
 default_args = {
-    'max_norm_h3': numpy.array([1.087]),
-    'max_norm_h4': numpy.array([1.0]),
-    'max_norm_y': numpy.array([1.595]),
-    'l_ir_h2': numpy.array([-1.434]),
-    'l_ir_h3': numpy.array([-1.64]),
-    'l_ir_h4': numpy.array([-1.41]),
-    'l_ir_y': numpy.array([-4.15]),
+    'dfac_h2': numpy.array([4.33]),
+    'dfac_h3': numpy.array([5.0]),
+    'dfac_h4': numpy.array([20.0]),
+    'max_norm_h3': numpy.array([7.209]),
+    'max_norm_h4': numpy.array([0.1]),
+    'max_norm_y': numpy.array([4.0]),
+    'l_ir_h2': numpy.array([-2.89]),
+    'l_ir_h3': numpy.array([-3.0]),
+    'l_ir_h4': numpy.array([2.5]),
+    'l_ir_y': numpy.array([-2.0]),
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -75,13 +80,14 @@ def update_softmax_layer(layer, log_range, norm, model_params, rng):
         layer.extensions[0].max_limit.set_value(norm.astype(numpy.float32))
 
 
-def main(job_id, params, cache):
+def main(job_id, requested_params, cache):
     # Fix sub directory problems
     sys.path.append(os.path.dirname(os.getcwd()))
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
     # Add parameters that are not currently being tuned but could potentially be tuned.
-    params.update(additional_args)
+    params = additional_args
+    params.update(requested_params)
 
     output_channels_h2 = int(1.00 * 50)
     output_channels_h3 = int(3.42 * 50)
@@ -103,18 +109,17 @@ def main(job_id, params, cache):
             'valid_stop': 24000,
             'test_stop': 4000,
             'batch_size': 100,
-            'max_epochs': 400,
+            'max_epochs': 1,
             'max_batches': 50,
             'sgd_seed': sgd_seed_str,
             'mlp_seed': mlp_seed_str,
-            'save_file': 'result',
 
             'kernel_size_h2': int(params['kernel_size_h2'][0]),
             'output_channels_h2': output_channels_h2,
             'irange_h2': math.pow(10, params['l_ir_h2'][0]),
             'max_kernel_norm_h2': params['max_norm_h2'][0],
             'dropout_h2': dropout_h2,
-            'dscale_h2': 1.0 / dropout_h2,
+            'dscale_h2': params['dfac_h2'][0] * 1.0 / dropout_h2,
             'w_lr_sc_h2': math.pow(dropout_h2, 2),
             'weight_decay_h2': math.pow(10, params['l_wdecay_h2'][0]),
 
@@ -123,7 +128,7 @@ def main(job_id, params, cache):
             'irange_h3': math.pow(10, params['l_ir_h3'][0]),
             'max_kernel_norm_h3': params['max_norm_h3'][0],
             'dropout_h3': dropout_h3,
-            'dscale_h3': 1.0 / dropout_h3,
+            'dscale_h3': params['dfac_h3'][0] * 1.0 / dropout_h3,
             'w_lr_sc_h3': math.pow(dropout_h3, 2),
             'weight_decay_h3': math.pow(10, params['l_wdecay_h3'][0]),
 
@@ -132,7 +137,7 @@ def main(job_id, params, cache):
             'irange_h4': math.pow(10, params['l_ir_h4'][0]),
             'max_kernel_norm_h4': params['max_norm_h4'][0],
             'dropout_h4': dropout_h4,
-            'dscale_h4': 1.0 / dropout_h4,
+            'dscale_h4': params['dfac_h4'][0] * 1.0 / dropout_h4,
             'w_lr_sc_h4': math.pow(dropout_h4, 2),
             'weight_decay_h4': math.pow(10, params['l_wdecay_h4'][0]),
 
@@ -154,8 +159,8 @@ def main(job_id, params, cache):
         train_obj = yaml_parse.load(yaml_string)
 
         if 'converge' in params:
-            train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = 400
-            train_obj.extensions.append(MonitorBasedSaveBest('valid_y_misclass', 'best_model.pkl'))
+            train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = 100
+            train_obj.extensions.append(MonitorBasedSaveBest('valid_y_misclass', params['save']))
 
         train_obj.setup()
         train_obj.model.monitor.on_channel_conflict = 'ignore'
@@ -191,7 +196,6 @@ def main(job_id, params, cache):
 
     if 'converge' not in params:
         train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
-    print 'starting main loop'
     train_obj.main_loop(do_setup=False)
     original_misclass = read_channel(train_obj.model, misclass_channel)
     return float(original_misclass) * 50
@@ -203,6 +207,8 @@ if __name__ == "__main__":
     parser.add_argument('--start', help='start for training set', type=int, default=0)
     parser.add_argument('--stop', help='stop for training set', type=int, default=20000)
     parser.add_argument('--gpu', type=int, help='request to use specific gpu')
+    parser.add_argument('--save', default='best_model.pkl', help='file to save best model to')
+    parser.add_argument('--rate', type=float, help='learning rate')
     args = parser.parse_args()
 
     if args.gpu >= 0:

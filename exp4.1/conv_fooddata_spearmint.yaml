@@ -66,16 +66,17 @@
         train_iteration_mode: even_sequential,
         monitoring_dataset:
             {
-                'train' : &train,
                 'valid' : !obj:fooddata.FoodData {
                               which_set: 'train',
                               start: %(valid_start)i,
                               stop:  %(valid_stop)i,
                               path: '../',
                           },
-                'test'  : !obj:pylearn2.datasets.mnist.MNIST {
+                'train' : *train,
+                'test'  : !obj:fooddata.FoodData {
                               which_set: 'test',
-                              stop: %(test_stop)i
+                              stop: %(test_stop)i,
+                              path: '../',
                           }
                 # 'test'  : !obj:pylearn2.datasets.mnist.MNIST {
                 #               which_set: 'test',
@@ -113,11 +114,6 @@
                 # !obj:pylearn2.termination_criteria.BatchCounter {
                 #     max_batches: %(max_batches)i
                 # },
-                !obj:pylearn2.termination_criteria.MonitorBased {
-                    channel_name: "valid_y_misclass",
-                    prop_decrease: 0.10,
-                    N: 30
-                },
             ]
         },
     }

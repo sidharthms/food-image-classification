@@ -6,6 +6,7 @@ import pdb
 import argparse
 from pylearn2.config import yaml_parse
 from pylearn2.monitor import read_channel
+from pylearn2.utils import serial
 from pylearn2.train_extensions.best_params import MonitorBasedSaveBest
 import sys
 
@@ -16,6 +17,8 @@ seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000))
 
 additional_args = {
     'l_wdecay_y': numpy.array([-5]),
+    'l_wdecay_h2': numpy.array([-5]),
+    'l_wdecay_h3': numpy.array([-5]),
     'start': 0,
     'stop': 20000,
 }
@@ -76,6 +79,8 @@ def main(job_id, requested_params, cache):
         'irange_h2': math.pow(10, params['l_ir_h2'][0]),
         'max_col_norm_h2': params['max_norm_h2'][0],
 
+        'weight_decay_h2': math.pow(10, params['l_wdecay_h2'][0]),
+        'weight_decay_h3': math.pow(10, params['l_wdecay_h3'][0]),
         'weight_decay_y': math.pow(10, params['l_wdecay_y'][0]),
         'max_col_norm_y': params['max_norm_y'][0],
         'irange_y': math.pow(10, params['l_ir_y'][0]),
@@ -105,6 +110,9 @@ def main(job_id, requested_params, cache):
     if 'converge' not in params:
         train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
+    if 'converge' in params:
+        print 'saving model'
+        serial.save(params['save'], train_obj.model, on_overwrite='backup')
     original_misclass = read_channel(train_obj.model, misclass_channel)
     return float(original_misclass)
 
