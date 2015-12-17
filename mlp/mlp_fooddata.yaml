@@ -69,14 +69,14 @@
                 model: *model
             }
         ],
-        cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
-            !obj:pylearn2.costs.cost.MethodCost {
-                method: 'cost_from_X'
-            }, !obj:pylearn2.costs.mlp.WeightDecay {
-                coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_y)f ]
-            }
-            ]
-        },
+        # cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
+        #     !obj:pylearn2.costs.cost.MethodCost {
+        #         method: 'cost_from_X'
+        #     }, !obj:pylearn2.costs.mlp.WeightDecay {
+        #         coeffs: [ %(weight_decay_h2)f, %(weight_decay_h3)f, %(weight_decay_y)f ]
+        #     }
+        #     ]
+        # },
         termination_criterion: !obj:pylearn2.termination_criteria.And {
             criteria: [
                 !obj:pylearn2.termination_criteria.EpochCounter {
