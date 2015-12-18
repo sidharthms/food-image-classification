@@ -16,8 +16,6 @@ sgd_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(10
                str(random.randrange(1000)) + ']'
 mlp_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
                str(random.randrange(1000)) + ']'
-k = 100
-
 additional_args = {
     'start': 0,
     'stop': 20000,
@@ -98,6 +96,9 @@ def main(job_id, requested_params, cache):
     dropout_h4 = float(params['dropout_h4'][0]) / 10
     dropout_y = float(params['dropout_y'][0]) / 10
 
+    if params.get('rate', None) is not None:
+        params['log_init_learning_rate'][0] += numpy.array([params['rate']])
+
     fixed_params = (params['kernel_size_h2'][0], params['kernel_size_h3'][0], params['dropout_h2'][0],
                     params['dropout_h3'][0], params['dropout_h4'][0], params['dropout_y'][0])
 
@@ -109,7 +110,7 @@ def main(job_id, requested_params, cache):
             'valid_stop': 24000,
             'test_stop': 4000,
             'batch_size': 100,
-            'max_epochs': 1,
+            'max_epochs': params.get('epochs', 1),
             'max_batches': 50,
             'sgd_seed': sgd_seed_str,
             'mlp_seed': mlp_seed_str,
@@ -159,7 +160,7 @@ def main(job_id, requested_params, cache):
         train_obj = yaml_parse.load(yaml_string)
 
         if 'converge' in params:
-            train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = 100
+            train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = params.get('epochs', 100)
             train_obj.extensions.append(MonitorBasedSaveBest('valid_y_misclass', params['save']))
 
         train_obj.setup()
@@ -197,6 +198,8 @@ def main(job_id, requested_params, cache):
     if 'converge' not in params:
         train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
+    if params.get('savelast', False):
+        serial.save(params['save'] + 'f', train_obj.model, on_overwrite='backup')
     original_misclass = read_channel(train_obj.model, misclass_channel)
     return float(original_misclass) * 50
 
@@ -209,11 +212,14 @@ if __name__ == "__main__":
     parser.add_argument('--gpu', type=int, help='request to use specific gpu')
     parser.add_argument('--save', default='best_model.pkl', help='file to save best model to')
     parser.add_argument('--rate', type=float, help='learning rate')
+    parser.add_argument('--savelast', action='store_true', help='save last state as well')
+    parser.add_argument('--epochs', type=int, help='num epochs')
     args = parser.parse_args()
 
     if args.gpu >= 0:
         import theano.sandbox.cuda
         theano.sandbox.cuda.use('gpu' + str(args.gpu))
 
-    default_args.update(vars(args))
+    filtered_args = {k: v for k, v in vars(args).items() if v is not None}
+    default_args.update(filtered_args)
     main(0, default_args, {})

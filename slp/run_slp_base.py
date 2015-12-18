@@ -23,10 +23,10 @@ additional_args = {
 }
 
 default_args = {
-    'l_wdecay_y': numpy.array([-3]),
-    'max_norm_y': numpy.array([0.1]),
+    'l_wdecay_y': numpy.array([0]),
+    'max_norm_y': numpy.array([0.128]),
     'l_ir_y': numpy.array([-6.0]),
-    'log_init_learning_rate': numpy.array([-5.746])
+    'log_init_learning_rate': numpy.array([-6.0])
 }
 
 misclass_channel = 'valid_y_misclass'

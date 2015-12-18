@@ -1,0 +1,144 @@
+Using gpu device 1: GeForce GTX TITAN X
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/utils/image.py:16: UserWarning: Unable to import matplotlib. Some features unavailable. Original exception: could not open display
+  "Original exception: " + str(matplotlib_exception))
+/afs/cs.wisc.edu/u/s/i/sidharth/private/pylearn2/pylearn2/model_extensions/norm_constraint.py:97: UserWarning: MaxL2FilterNorm is deprecated and may be removed on or after 2016-01-31. Use ConstrainFilterL2Norm.
+  warnings.warn("MaxL2FilterNorm is deprecated and may be removed on or"
+Input shape: (96, 96)
+Detector space: (92, 92)
+Output space: (46, 46)
+Input shape: (46, 46)
+Detector space: (42, 42)
+Output space: (21, 21)
+Input shape: (21, 21)
+Detector space: (17, 17)
+Output space: (9, 9)
+Loading data took 23.584 ms
+Loading data took 133.824 ms
+Loading data took 133.551 ms
+Parameter and initial learning rate summary:
+	h2_W: 8.09999979538e-06
+	h2_b: 9.99999974738e-06
+	h3_W: 8.09999979538e-06
+	h3_b: 9.99999974738e-06
+	h4_W: 6.39999983832e-06
+	h4_b: 9.99999974738e-06
+	softmax_b: 9.99999974738e-06
+	softmax_W: 6.39999983832e-06
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 10.922168 seconds
+loading pre trained model
+loading done
+Time this epoch: 0:01:04.523420
+compiling begin_record_entry...
+compiling begin_record_entry done. Time elapsed: 0.037676 seconds
+Monitored channels: 
+	learning_rate
+	momentum
+	test_objective
+	test_y_misclass
+	total_seconds_last_epoch
+	train_objective
+	train_y_misclass
+	training_seconds_this_epoch
+	valid_objective
+	valid_y_misclass
+Compiling accum...
+graph size: 175
+graph size: 159
+graph size: 159
+Compiling accum done. Time elapsed: 2.995968 seconds
+Monitoring step:
+	Epochs seen: 1
+	Batches seen: 200
+	Examples seen: 20000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.209278568625
+	test_y_misclass: 0.0504999905825
+	total_seconds_last_epoch: 0.0
+	train_objective: 0.0238663442433
+	train_y_misclass: 0.0104999924079
+	training_seconds_this_epoch: 64.5234375
+	valid_objective: 0.215073913336
+	valid_y_misclass: 0.0577499940991
+Saving to best_model_20_4c.pkl...
+Saving to best_model_20_4c.pkl done. Time elapsed: 7.611044 seconds
+Time this epoch: 0:01:09.803671
+Monitoring step:
+	Epochs seen: 2
+	Batches seen: 400
+	Examples seen: 40000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.231690570712
+	test_y_misclass: 0.04774999246
+	total_seconds_last_epoch: 131.680847168
+	train_objective: 0.0276944953948
+	train_y_misclass: 0.00669999606907
+	training_seconds_this_epoch: 69.8036575317
+	valid_objective: 0.213602975011
+	valid_y_misclass: 0.0489999987185
+Saving to best_model_20_4c.pkl...
+Saving to best_model_20_4c.pkl done. Time elapsed: 7.558937 seconds
+Time this epoch: 0:01:09.754392
+Monitoring step:
+	Epochs seen: 3
+	Batches seen: 600
+	Examples seen: 60000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.220583543181
+	test_y_misclass: 0.0559999905527
+	total_seconds_last_epoch: 133.894271851
+	train_objective: 0.030415834859
+	train_y_misclass: 0.0150499865413
+	training_seconds_this_epoch: 69.7543716431
+	valid_objective: 0.230091199279
+	valid_y_misclass: 0.0637499913573
+Time this epoch: 0:01:10.368690
+Monitoring step:
+	Epochs seen: 4
+	Batches seen: 800
+	Examples seen: 80000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.225998386741
+	test_y_misclass: 0.0502499938011
+	total_seconds_last_epoch: 126.388237
+	train_objective: 0.0277377385646
+	train_y_misclass: 0.00794999487698
+	training_seconds_this_epoch: 70.3686676025
+	valid_objective: 0.228716805577
+	valid_y_misclass: 0.0549999922514
+Time this epoch: 0:01:10.332543
+Monitoring step:
+	Epochs seen: 5
+	Batches seen: 1000
+	Examples seen: 100000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.236628681421
+	test_y_misclass: 0.0479999892414
+	total_seconds_last_epoch: 126.904678345
+	train_objective: 0.027254357934
+	train_y_misclass: 0.00444999663159
+	training_seconds_this_epoch: 70.3325271606
+	valid_objective: 0.213276028633
+	valid_y_misclass: 0.04774999246
+Saving to best_model_20_4c.pkl...
+Saving to best_model_20_4c.pkl done. Time elapsed: 9.007484 seconds
+Time this epoch: 0:01:09.414665
+Monitoring step:
+	Epochs seen: 6
+	Batches seen: 1200
+	Examples seen: 120000
+	learning_rate: 1.00000024759e-05
+	momentum: 0.599999666214
+	test_objective: 0.223875671625
+	test_y_misclass: 0.0474999845028
+	total_seconds_last_epoch: 135.892059326
+	train_objective: 0.0248098522425
+	train_y_misclass: 0.00594999548048
+	training_seconds_this_epoch: 69.4146652222
+	valid_objective: 0.220919176936
+	valid_y_misclass: 0.0499999970198

@@ -13,8 +13,6 @@ __author__ = 'luke'
 
 seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
            str(random.randrange(1000)) + ']'
-default_seed = [2012, 11, 6, 9]
-k = 70
 
 additional_args = {
     'l_wdecay_y': numpy.array([-3]),
@@ -57,7 +55,7 @@ def main(job_id, requested_params, cache):
     params.update(requested_params)
 
     if params.get('rate', None) is not None:
-        params['log_init_learning_rate'][0] = numpy.array([params['rate']])
+        params['log_init_learning_rate'][0] += numpy.array([params['rate']])
 
     train_params = {
         'train_start': params['start'],
@@ -88,8 +86,6 @@ def main(job_id, requested_params, cache):
     with open('mlp_fooddata.yaml', 'r') as f:
         trainer = f.read()
 
-    print trainer
-
     yaml_string = trainer % train_params
     train_obj = yaml_parse.load(yaml_string)
 
@@ -101,12 +97,11 @@ def main(job_id, requested_params, cache):
         train_obj.model.set_param_values(pretrained_model.get_param_values())
 
     if 'converge' in params:
-        train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = 200
+        train_obj.algorithm.termination_criterion._criteria[0]._max_epochs = params.get('epochs', 100)
         # train_obj.extensions.append(MonitorBasedSaveBest('valid_y_misclass', 'best_model.pkl'))
 
     train_obj.setup()
     train_obj.model.monitor.on_channel_conflict = 'ignore'
-
     if 'converge' not in params:
         train_obj.algorithm.termination_criterion._criteria[0].initialize(train_obj.model)
     train_obj.main_loop(do_setup=False)
@@ -127,11 +122,13 @@ if __name__ == "__main__":
     parser.add_argument('--gpu', type=int, help='request to use specific gpu')
     parser.add_argument('--save', default='best_model.pkl', help='file to save best model to')
     parser.add_argument('--rate', type=float, help='learning rate')
+    parser.add_argument('--epochs', type=int, help='num epochs')
     args = parser.parse_args()
 
     if args.gpu >= 0:
         import theano.sandbox.cuda
         theano.sandbox.cuda.use('gpu' + str(args.gpu))
 
-    default_args.update(vars(args))
+    filtered_args = {k: v for k, v in vars(args).items() if v is not None}
+    default_args.update(filtered_args)
     main(0, default_args, {})

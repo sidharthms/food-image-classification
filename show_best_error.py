@@ -25,5 +25,6 @@ for d in xrange(3):
 
 i = data[validation_index].argmin()
 
+print 'at index', i
 for d in xrange(3):
     print allmatches[d][0], data[d, i]
