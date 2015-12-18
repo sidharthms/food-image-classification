@@ -12,6 +12,7 @@
             shape: &window_shape [96, 96],
             num_channels: 3,
         },
+        seed: %(mlp_seed)s,
         layers: [!obj:pylearn2.models.mlp.Softmax {
                      max_col_norm: %(max_col_norm_y)f,
                      layer_name: 'y',
@@ -31,18 +32,18 @@
         train_iteration_mode: even_sequential,
         monitoring_dataset:
             {
-                'train' : *train,
                 'valid' : !obj:fooddata.FoodData {
                               which_set: 'train',
                               start: %(valid_start)i,
                               stop:  %(valid_stop)i,
                               path: '../',
                           },
-                'test'  : !obj:fooddata.FoodData {
-                              which_set: 'test',
-                              stop: %(test_stop)i,
-                              path: '../',
-                          }
+                # 'train' : *train,
+                # 'test'  : !obj:fooddata.FoodData {
+                #               which_set: 'test',
+                #               stop: %(test_stop)i,
+                #               path: '../',
+                #           }
             },
         # update_callbacks: [
         #     !obj:pylearn2.training_algorithms.sgd.EpochMonitor {
@@ -59,6 +60,14 @@
                 model: *model
             }
         ],
+        cost: !obj:pylearn2.costs.cost.SumOfCosts { costs: [
+            !obj:pylearn2.costs.cost.MethodCost {
+                method: 'cost_from_X'
+            }, !obj:pylearn2.costs.mlp.WeightDecay {
+                coeffs: [ %(weight_decay_y)f ]
+            }
+            ]
+        },
         termination_criterion: !obj:pylearn2.termination_criteria.And {
             criteria: [
                 !obj:pylearn2.termination_criteria.EpochCounter {

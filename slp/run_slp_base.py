@@ -12,19 +12,21 @@ import sys
 
 __author__ = 'luke'
 
-seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
-           str(random.randrange(1000)) + ']'
+sgd_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
+               str(random.randrange(1000)) + ']'
+mlp_seed_str = '[' + str(random.randrange(1000)) + ',' + str(random.randrange(1000)) + ',' + \
+               str(random.randrange(1000)) + ']'
 
 additional_args = {
-    'l_wdecay_y': numpy.array([-3]),
-    'left_artificial_slope': ['False'],
-    'right_artificial_slope': ['True'],
+    'start': 0,
+    'stop': 20000,
 }
 
 default_args = {
-    'max_norm_y': numpy.array([0.5]),
-    'l_ir_y': numpy.array([-0.5]),
-    'log_init_learning_rate': numpy.array([-5.7])
+    'l_wdecay_y': numpy.array([-3]),
+    'max_norm_y': numpy.array([0.1]),
+    'l_ir_y': numpy.array([-6.0]),
+    'log_init_learning_rate': numpy.array([-5.746])
 }
 
 misclass_channel = 'valid_y_misclass'
@@ -49,7 +51,7 @@ def main(job_id, requested_params, cache):
     params = additional_args
     params.update(requested_params)
 
-    if params['rate'] is not None:
+    if params.get('rate', None) is not None:
         params['log_init_learning_rate'][0] = numpy.array([params['rate']])
 
     train_params = {
@@ -59,9 +61,10 @@ def main(job_id, requested_params, cache):
         'valid_stop': 24000,
         'test_stop': 4000,
         'batch_size': 100,
-        'max_epochs': 5,
+        'max_epochs': 20,
         'max_batches': 10,
-        'sgd_seed': seed_str,
+        'sgd_seed': sgd_seed_str,
+        'mlp_seed': mlp_seed_str,
 
         'weight_decay_y': math.pow(10, params['l_wdecay_y'][0]),
         'max_col_norm_y': params['max_norm_y'][0],

@@ -1,11 +1,11 @@
 {
     "language"        : "PYTHON",
-    "experiment-name" : "food_classification_slp.1",
+    "experiment-name" : "food_classification_slp.3",
     "polling-time"    : 1,
     "resources" : {
         "my-machine" : {
             "scheduler"         : "managed",
-            "max-concurrent"    : 2,
+            "max-concurrent"    : 12,
             "gpus"              : 2
         }
     },
@@ -29,6 +29,12 @@
             "size" : 1,
             "min"  : -6,
             "max"  : -0.1
+        },
+        "l_wdecay_y" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : -6,
+            "max"  : 0
         },
         "log_init_learning_rate" : {
             "type" : "FLOAT",
